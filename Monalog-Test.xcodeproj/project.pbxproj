@@ -1,0 +1,321 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		797EEF9B1DFA774B005D2743 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEF9A1DFA774B005D2743 /* AppDelegate.swift */; };
+		797EEF9D1DFA774B005D2743 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEF9C1DFA774B005D2743 /* ViewController.swift */; };
+		797EEFA01DFA774B005D2743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797EEF9E1DFA774B005D2743 /* Main.storyboard */; };
+		797EEFA31DFA774B005D2743 /* Monalog_Test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFA11DFA774B005D2743 /* Monalog_Test.xcdatamodeld */; };
+		797EEFA51DFA774B005D2743 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797EEFA41DFA774B005D2743 /* Assets.xcassets */; };
+		797EEFA81DFA774B005D2743 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797EEFA61DFA774B005D2743 /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		797EEF971DFA774B005D2743 /* Monalog-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monalog-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		797EEF9A1DFA774B005D2743 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		797EEF9C1DFA774B005D2743 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		797EEF9F1DFA774B005D2743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		797EEFA21DFA774B005D2743 /* Monalog_Test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Monalog_Test.xcdatamodel; sourceTree = "<group>"; };
+		797EEFA41DFA774B005D2743 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		797EEFA71DFA774B005D2743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		797EEFA91DFA774B005D2743 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		797EEF941DFA774B005D2743 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		797EEF8E1DFA774B005D2743 = {
+			isa = PBXGroup;
+			children = (
+				797EEF991DFA774B005D2743 /* Monalog-Test */,
+				797EEF981DFA774B005D2743 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		797EEF981DFA774B005D2743 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				797EEF971DFA774B005D2743 /* Monalog-Test.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		797EEF991DFA774B005D2743 /* Monalog-Test */ = {
+			isa = PBXGroup;
+			children = (
+				797EEF9A1DFA774B005D2743 /* AppDelegate.swift */,
+				797EEF9C1DFA774B005D2743 /* ViewController.swift */,
+				797EEF9E1DFA774B005D2743 /* Main.storyboard */,
+				797EEFA41DFA774B005D2743 /* Assets.xcassets */,
+				797EEFA61DFA774B005D2743 /* LaunchScreen.storyboard */,
+				797EEFA91DFA774B005D2743 /* Info.plist */,
+				797EEFA11DFA774B005D2743 /* Monalog_Test.xcdatamodeld */,
+			);
+			path = "Monalog-Test";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		797EEF961DFA774B005D2743 /* Monalog-Test */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 797EEFAC1DFA774B005D2743 /* Build configuration list for PBXNativeTarget "Monalog-Test" */;
+			buildPhases = (
+				797EEF931DFA774B005D2743 /* Sources */,
+				797EEF941DFA774B005D2743 /* Frameworks */,
+				797EEF951DFA774B005D2743 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Monalog-Test";
+			productName = "Monalog-Test";
+			productReference = 797EEF971DFA774B005D2743 /* Monalog-Test.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		797EEF8F1DFA774B005D2743 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Benjamin Lim";
+				TargetAttributes = {
+					797EEF961DFA774B005D2743 = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 797EEF921DFA774B005D2743 /* Build configuration list for PBXProject "Monalog-Test" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 797EEF8E1DFA774B005D2743;
+			productRefGroup = 797EEF981DFA774B005D2743 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				797EEF961DFA774B005D2743 /* Monalog-Test */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		797EEF951DFA774B005D2743 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				797EEFA81DFA774B005D2743 /* LaunchScreen.storyboard in Resources */,
+				797EEFA51DFA774B005D2743 /* Assets.xcassets in Resources */,
+				797EEFA01DFA774B005D2743 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		797EEF931DFA774B005D2743 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				797EEF9D1DFA774B005D2743 /* ViewController.swift in Sources */,
+				797EEFA31DFA774B005D2743 /* Monalog_Test.xcdatamodeld in Sources */,
+				797EEF9B1DFA774B005D2743 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		797EEF9E1DFA774B005D2743 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				797EEF9F1DFA774B005D2743 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		797EEFA61DFA774B005D2743 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				797EEFA71DFA774B005D2743 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		797EEFAA1DFA774B005D2743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		797EEFAB1DFA774B005D2743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		797EEFAD1DFA774B005D2743 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Monalog-Test/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "BenCode.Monalog-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		797EEFAE1DFA774B005D2743 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Monalog-Test/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "BenCode.Monalog-Test";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		797EEF921DFA774B005D2743 /* Build configuration list for PBXProject "Monalog-Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				797EEFAA1DFA774B005D2743 /* Debug */,
+				797EEFAB1DFA774B005D2743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		797EEFAC1DFA774B005D2743 /* Build configuration list for PBXNativeTarget "Monalog-Test" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				797EEFAD1DFA774B005D2743 /* Debug */,
+				797EEFAE1DFA774B005D2743 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		797EEFA11DFA774B005D2743 /* Monalog_Test.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				797EEFA21DFA774B005D2743 /* Monalog_Test.xcdatamodel */,
+			);
+			currentVersion = 797EEFA21DFA774B005D2743 /* Monalog_Test.xcdatamodel */;
+			path = Monalog_Test.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 797EEF8F1DFA774B005D2743 /* Project object */;
+}
