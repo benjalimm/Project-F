@@ -13,6 +13,9 @@
 		797EEFA31DFA774B005D2743 /* Monalog_Test.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFA11DFA774B005D2743 /* Monalog_Test.xcdatamodeld */; };
 		797EEFA51DFA774B005D2743 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 797EEFA41DFA774B005D2743 /* Assets.xcassets */; };
 		797EEFA81DFA774B005D2743 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797EEFA61DFA774B005D2743 /* LaunchScreen.storyboard */; };
+		797EEFB01DFA7902005D2743 /* CustomTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFAF1DFA7902005D2743 /* CustomTabBarController.swift */; };
+		797EEFB21DFB0204005D2743 /* FinnController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFB11DFB0204005D2743 /* FinnController.swift */; };
+		797EEFB41DFBE2C3005D2743 /* FeedControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFB31DFBE2C2005D2743 /* FeedControllerHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +27,9 @@
 		797EEFA41DFA774B005D2743 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		797EEFA71DFA774B005D2743 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		797EEFA91DFA774B005D2743 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		797EEFAF1DFA7902005D2743 /* CustomTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTabBarController.swift; sourceTree = "<group>"; };
+		797EEFB11DFB0204005D2743 /* FinnController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnController.swift; sourceTree = "<group>"; };
+		797EEFB31DFBE2C2005D2743 /* FeedControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedControllerHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +69,9 @@
 				797EEFA61DFA774B005D2743 /* LaunchScreen.storyboard */,
 				797EEFA91DFA774B005D2743 /* Info.plist */,
 				797EEFA11DFA774B005D2743 /* Monalog_Test.xcdatamodeld */,
+				797EEFAF1DFA7902005D2743 /* CustomTabBarController.swift */,
+				797EEFB11DFB0204005D2743 /* FinnController.swift */,
+				797EEFB31DFBE2C2005D2743 /* FeedControllerHelper.swift */,
 			);
 			path = "Monalog-Test";
 			sourceTree = "<group>";
@@ -99,6 +108,7 @@
 				TargetAttributes = {
 					797EEF961DFA774B005D2743 = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = M3P85P7J6X;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -139,8 +149,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				797EEFB21DFB0204005D2743 /* FinnController.swift in Sources */,
 				797EEF9D1DFA774B005D2743 /* ViewController.swift in Sources */,
 				797EEFA31DFA774B005D2743 /* Monalog_Test.xcdatamodeld in Sources */,
+				797EEFB41DFBE2C3005D2743 /* FeedControllerHelper.swift in Sources */,
+				797EEFB01DFA7902005D2743 /* CustomTabBarController.swift in Sources */,
 				797EEF9B1DFA774B005D2743 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -262,6 +275,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = M3P85P7J6X;
 				INFOPLIST_FILE = "Monalog-Test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "BenCode.Monalog-Test";
@@ -274,6 +288,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = M3P85P7J6X;
 				INFOPLIST_FILE = "Monalog-Test/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "BenCode.Monalog-Test";
