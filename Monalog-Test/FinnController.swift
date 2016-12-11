@@ -8,11 +8,17 @@
 
 import UIKit
 
-class FinnController: UICollectionViewController {
+class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var messages: [Message]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView?.backgroundColor = UIColor.white
+        
     }
+    
 }
 
 
