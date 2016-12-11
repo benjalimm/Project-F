@@ -18,12 +18,9 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupData()
-        
-        
-        
-        
+
         navigationItem.title = "FINNPUT"
         
         collectionView?.alwaysBounceVertical = true
@@ -60,7 +57,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
 }
 
-class FeedCell: UICollectionViewCell {
+class FeedCell: BaseCell {
     
     var post: Post? {
         didSet {
@@ -75,16 +72,6 @@ class FeedCell: UICollectionViewCell {
             
             
         }
-    }
-    
-    override init (frame: CGRect) {
-        super.init(frame: frame)
-        
-        setupViews()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
     }
     
     let nameLabel = { () -> UILabel in
@@ -135,7 +122,8 @@ class FeedCell: UICollectionViewCell {
         return button
     }
     
-    func setupViews() {
+    override func setupViews() {
+        super.setupViews()
         backgroundColor = UIColor.white
         
         
@@ -151,13 +139,27 @@ class FeedCell: UICollectionViewCell {
         
         addConstraint(NSLayoutConstraint(item: itemTextView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: costTextView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-
-
-
         
     }
     
 }
+
+class BaseCell: UICollectionViewCell {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupViews()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setupViews() {
+        
+    }
+}
+
+
 
 extension UIView {
     func addConstraintsWithFormat(format: String, views: UIView...) {
