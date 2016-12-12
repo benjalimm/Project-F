@@ -17,15 +17,11 @@ extension FinnController {
         if let context = delegate?.persistentContainer.viewContext {
             
             do {
-                let entityNames = ["Message"]
-                
-                for entityName in entityNames {
-                    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+                    let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Message")
                     let objects = try(context.fetch(fetchRequest)) as? [NSManagedObject]
                     
                     for object in objects! {
                         context.delete(object)
-                    }
                 }
                 try (context.save())
                 
