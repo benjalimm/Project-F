@@ -45,10 +45,7 @@ extension FinnController {
         if let context = delegate?.persistentContainer.viewContext {
             
             
-            createMessageWithText(text: "Hey there I'm Finn!", minutesAgo: 5, context: context)
-            createMessageWithText(text: "I would really love to help you out! I want to make poo poo in the toilet bowl all day everyday please come and do it with me!", minutesAgo: 4, context: context)
-            createMessageWithText(text: "I would really love to help you out! I want to make poo poo in the toilet bowl all day everyday please come and do it with me!I would really love to help you out! I want to make poo poo in the t", minutesAgo: 3, context: context)
-
+            createFinnMessagesWithContext(context: context)
             
             
             do {
@@ -62,12 +59,24 @@ extension FinnController {
         loadData()
         
     }
-    
-    private func createMessageWithText(text: String, minutesAgo: Double, context: NSManagedObjectContext) {
+    private func createMessageWithText(text: String, minutesAgo: Double, context: NSManagedObjectContext, isSender: Bool = false) {
         let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
         message.text = text
         message.date = NSDate().addingTimeInterval(-minutesAgo * 60)
+        message.isSender = NSNumber(booleanLiteral: isSender) as Bool
     }
+    
+    private func createFinnMessagesWithContext(context: NSManagedObjectContext) {
+        createMessageWithText(text: "Hey there I'm Finn!", minutesAgo: 5, context: context)
+        createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message!", minutesAgo: 4, context: context)
+        createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message", minutesAgo: 3, context: context)
+         createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message", minutesAgo: 1, context: context)
+        
+        
+        //response message
+        createMessageWithText(text: "I spend $10 on shoes, $60 on petrol, $30 on wood.", minutesAgo: 2, context: context, isSender: true)
+    }
+
     
     func loadData() {
         let delegate = UIApplication.shared.delegate as? AppDelegate

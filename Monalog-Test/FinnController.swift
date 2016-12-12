@@ -36,15 +36,40 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatLogMessageCell
         
         cell.messageTextView.text = messages?[indexPath.item].text
-        if let messageText = messages?[indexPath.item].text {
+        if let message = messages?[indexPath.item], let messageText = message.text {
             
             let size = CGSize(width: 250, height: 1000)
             let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
             let estimatedFrame = NSString(string: messageText).boundingRect(with: size, options: options, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 16)], context: nil)
             
-            cell.messageTextView.frame = CGRect(x: 44 + 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
-            
-            cell.textBubbleView.frame = CGRect(x: 44, y: 0, width: estimatedFrame.width + 24, height: estimatedFrame.height + 20)
+            if message.isSender == false {
+                cell.messageTextView.frame = CGRect(x: 44 + 4, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                
+                cell.textBubbleView.frame = CGRect(x: 44 - 10, y: -4, width: estimatedFrame.width + 24 + 16, height: estimatedFrame.height + 26)
+                
+                cell.profileImageView.isHidden = false
+                
+                //cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
+                cell.bubbleImageView.image = ChatLogMessageCell.grayBubbleImage
+                cell.bubbleImageView.tintColor = UIColor(white: 0.95, alpha: 1)
+                cell.messageTextView.textColor = UIColor.black
+            } else {
+                //outgoing sending message
+                
+                cell.messageTextView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 16 - 20, y: 0, width: estimatedFrame.width + 16, height: estimatedFrame.height + 20)
+                
+                cell.textBubbleView.frame = CGRect(x: view.frame.width - estimatedFrame.width - 24 - 24, y: -4, width: estimatedFrame.width + 24 + 16, height: estimatedFrame.height + 20 + 6)
+                
+                cell.profileImageView.isHidden = true
+                
+                //cell.textBubbleView.backgroundColor = UIColor.FinnMaroonBlur()
+                cell.bubbleImageView.image = ChatLogMessageCell.blueBubbleImage
+                cell.bubbleImageView.tintColor = UIColor.FinnMaroonBlur()
+                cell.messageTextView.textColor = UIColor.white
+                
+                
+            }
+
             
         }
         
@@ -84,7 +109,7 @@ class ChatLogMessageCell: BaseCell {
     
     let textBubbleView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor(white: 0.95, alpha: 1)
+        //view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
         return view
@@ -99,6 +124,20 @@ class ChatLogMessageCell: BaseCell {
         return imageView
     }()
     
+    static let grayBubbleImage = UIImage(named: "bubble_gray")?.resizableImage(withCapInsets: UIEdgeInsetsMake(22, 26, 22, 26)).withRenderingMode(.alwaysTemplate)
+    
+    static let blueBubbleImage = UIImage(named: "bubble_blue")?.resizableImage(withCapInsets: UIEdgeInsetsMake(22, 26, 22, 26)).withRenderingMode(.alwaysTemplate)
+
+    
+    let bubbleImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = ChatLogMessageCell.grayBubbleImage
+        imageView.tintColor = UIColor(white: 0.90, alpha: 1)
+        return imageView
+    }()
+    
+    
+    
     override func setupViews() {
         super.setupViews()
         
@@ -109,6 +148,12 @@ class ChatLogMessageCell: BaseCell {
         addConstraintsWithFormat(format: "H:|-8-[v0(30)]", views: profileImageView)
         addConstraintsWithFormat(format: "V:[v0(30)]|", views: profileImageView)
         profileImageView.backgroundColor = UIColor.FinnBlue()
+        
+        textBubbleView.addSubview(bubbleImageView)
+        textBubbleView.addConstraintsWithFormat(format: "H:|[v0]|", views: bubbleImageView)
+        textBubbleView.addConstraintsWithFormat(format: "V:|[v0]|", views: bubbleImageView)
+
+        
 
 
     }
