@@ -180,20 +180,23 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        if let count = fetchedResultsController.sections?[0].numberOfObjects {
-            return count
-        }
-        
-        //if let count = messages?.count {
-        //return count
+        // if let count = fetchedResultsController.sections?[0].numberOfObjects {
+        //    return count
         //}
+        
+        if let count = messages?.count {
+        return count
+    }
         return 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatLogMessageCell
         
-        let message = fetchedResultsController.object(at: indexPath) as! Message
+        
+        //let message = fetchedResultsController.object(at: indexPath) as! Message
+
+        //print(message?.count)
         
         cell.messageTextView.text = messages?[indexPath.item].text
         if let message = messages?[indexPath.item], let messageText = message.text {
