@@ -14,15 +14,94 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     var messages: [Message]?
     
+    let messageInputContainerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    let inputTextField: UITextField = {
+        let textField = UITextField()
+        textField.placeholder = "Enter message"
+        return textField
+    }()
+    
+    let sendButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "send"), for: .normal)
+        button.tintColor = UIColor.FinnMaroon()
+        return button
+    }()
+    
+    var bottomConstraint: NSLayoutConstraint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
         
         collectionView?.backgroundColor = UIColor.white
+        collectionView?.alwaysBounceVertical = true
         collectionView?.register(ChatLogMessageCell.self, forCellWithReuseIdentifier: cellId)
+        
+        view.addSubview(messageInputContainerView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: messageInputContainerView)
+        view.addConstraintsWithFormat(format: "V:[v0(48)]", views: messageInputContainerView)
+
+        bottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraint!)
+        
         
         messages = messages?.sorted(by: {$0.date!.compare($1.date! as Date) == .orderedAscending})
         
+        setupInputComponents()
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+
+    
+        }
+    
+    func handleKeyboardNotification(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+            print(keyboardFrame)
+            
+            let isKeyboardShowing = notification.name == .UIKeyboardWillShow
+            
+            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame.height + 49 : 0
+            
+            UIView.animate(withDuration: 0, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations: { 
+                self.view.layoutIfNeeded()
+                }, completion: { (completed) in
+                    
+                    if isKeyboardShowing {
+                        let indexPath = NSIndexPath(item: self.messages!.count - 1, section: 0)
+                        self.collectionView?.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: true)
+                    }
+                    
+                    
+            })
+            
+        }
+        
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        inputTextField.endEditing(true)
+    }
+    
+    private func setupInputComponents() {
+        messageInputContainerView.addSubview(inputTextField)
+        messageInputContainerView.addSubview(sendButton)
+        
+        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
+        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: inputTextField)
+        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
+
+
+
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -92,7 +171,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets(top: 8, left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 8, left: 0, bottom: 49, right: 0)
     }
     
 }
@@ -104,6 +183,7 @@ class ChatLogMessageCell: BaseCell {
         textView.font = UIFont.systemFont(ofSize: 16)
         textView.text = "Sample Message"
         textView.backgroundColor = UIColor.clear
+        textView.isEditable = false
         return textView
     }()
     
