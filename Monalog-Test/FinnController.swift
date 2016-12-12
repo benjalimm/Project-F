@@ -26,18 +26,71 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return textField
     }()
     
-    let sendButton: UIButton = {
+    lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "send"), for: .normal)
         button.tintColor = UIColor.FinnMaroon()
+        button.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         return button
     }()
     
+    func handleSend() {
+        print(inputTextField.text)
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        
+        let message = FinnController.createMessageWithText(text: inputTextField.text!, minutesAgo: 0, context: context, isSender: true)
+        
+        do {
+            try context.save()
+            
+            messages?.append(message)
+            
+            let item = messages!.count - 1
+            let insertionIndexPath = IndexPath(item: item, section: 0)
+            
+            collectionView?.insertItems(at: [insertionIndexPath])
+            collectionView?.scrollToItem(at: insertionIndexPath, at: .top, animated: true)
+        } catch let err {
+            print (err)
+        }
+        
+    }
+    
     var bottomConstraint: NSLayoutConstraint?
+    
+    func simulate() {
+        print("simulate")
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        let message = FinnController.createMessageWithText(text: "Here's a text message that was sent a few minutes ago", minutesAgo: 0, context: context)
+        
+        do {
+            try context.save()
+            
+            messages?.append(message)
+            
+            messages = messages?.sorted(by: {$0.date!.compare($1.date! as Date) == .orderedAscending})
+
+            
+            if let item = messages!.index(of: message) {
+                let receivingIndexPath = IndexPath(item: item, section: 0)
+                collectionView?.insertItems(at: [receivingIndexPath])
+                collectionView?.scrollToItem(at: receivingIndexPath, at: .top, animated: true)
+            }
+            
+        } catch let err {
+            print (err)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupData()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .plain, target: self, action: #selector(simulate))
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
@@ -57,6 +110,9 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        
+        let indexPath = IndexPath(item: self.messages!.count - 1, section: 0)
+        collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
 
     
         }
@@ -78,7 +134,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
                     
                     if isKeyboardShowing {
                         let indexPath = NSIndexPath(item: self.messages!.count - 1, section: 0)
-                        self.collectionView?.scrollToItem(at: indexPath as IndexPath, at: .bottom, animated: true)
+                        self.collectionView?.scrollToItem(at: indexPath as IndexPath, at: .top, animated: true)
                     }
                     
                     

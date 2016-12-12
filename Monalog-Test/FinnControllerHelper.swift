@@ -59,22 +59,23 @@ extension FinnController {
         loadData()
         
     }
-    private func createMessageWithText(text: String, minutesAgo: Double, context: NSManagedObjectContext, isSender: Bool = false) {
+    static func createMessageWithText(text: String, minutesAgo: Double, context: NSManagedObjectContext, isSender: Bool = false) -> Message{
         let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
         message.text = text
         message.date = NSDate().addingTimeInterval(-minutesAgo * 60)
         message.isSender = NSNumber(booleanLiteral: isSender) as Bool
+        return message 
     }
     
     private func createFinnMessagesWithContext(context: NSManagedObjectContext) {
-        createMessageWithText(text: "Hey there I'm Finn!", minutesAgo: 5, context: context)
-        createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message!", minutesAgo: 4, context: context)
-        createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message", minutesAgo: 3, context: context)
-         createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message", minutesAgo: 1, context: context)
+        FinnController.createMessageWithText(text: "Hey there I'm Finn!", minutesAgo: 5, context: context)
+        FinnController.createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message!", minutesAgo: 4, context: context)
+        FinnController.createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message", minutesAgo: 3, context: context)
+         FinnController.createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message Test Message", minutesAgo: 1, context: context)
         
         
         //response message
-        createMessageWithText(text: "I spend $10 on shoes, $60 on petrol, $30 on wood.", minutesAgo: 2, context: context, isSender: true)
+        FinnController.createMessageWithText(text: "I spend $10 on shoes, $60 on petrol, $30 on wood.", minutesAgo: 2, context: context, isSender: true)
     }
 
     
