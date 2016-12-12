@@ -17,7 +17,7 @@ extension FinnController {
         if let context = delegate?.persistentContainer.viewContext {
             
             do {
-                let entityNames = ["User", "Message"]
+                let entityNames = ["Message"]
                 
                 for entityName in entityNames {
                     let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
@@ -44,10 +44,8 @@ extension FinnController {
         
         if let context = delegate?.persistentContainer.viewContext {
             
-            let ben = NSEntityDescription.insertNewObject(forEntityName: "User", into: context) as! User
-            ben.name = "ben"
             
-            createMessageWithText(text: "Hey there I'm Finn!", user: ben, minutesAgo: 2, context: context)
+            createMessageWithText(text: "Hey there I'm Finn!", minutesAgo: 2, context: context)
             
             
             do {
@@ -62,9 +60,8 @@ extension FinnController {
         
     }
     
-    private func createMessageWithText(text: String, user: User, minutesAgo: Double, context: NSManagedObjectContext) {
+    private func createMessageWithText(text: String, minutesAgo: Double, context: NSManagedObjectContext) {
         let message = NSEntityDescription.insertNewObject(forEntityName: "Message", into: context) as! Message
-        message.user = user
         message.text = text
         message.date = NSDate().addingTimeInterval(-minutesAgo * 60)
     }
