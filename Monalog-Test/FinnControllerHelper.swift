@@ -45,7 +45,10 @@ extension FinnController {
         if let context = delegate?.persistentContainer.viewContext {
             
             
-            createMessageWithText(text: "Hey there I'm Finn!", minutesAgo: 2, context: context)
+            createMessageWithText(text: "Hey there I'm Finn!", minutesAgo: 5, context: context)
+            createMessageWithText(text: "I would really love to help you out! I want to make poo poo in the toilet bowl all day everyday please come and do it with me!", minutesAgo: 4, context: context)
+            createMessageWithText(text: "I would really love to help you out! I want to make poo poo in the toilet bowl all day everyday please come and do it with me!I would really love to help you out! I want to make poo poo in the t", minutesAgo: 3, context: context)
+
             
             
             do {
