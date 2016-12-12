@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
@@ -86,8 +87,25 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
     
+    let fetchedResultsController:NSFetchedResultsController<Message> = {
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Message")
+        fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        return frc as! NSFetchedResultsController<Message>
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        do {
+            try fetchedResultsController.performFetch()
+            print(fetchedResultsController.sections?[0].numberOfObjects)
+        } catch let err {
+            print (err)
+        }
+        
         setupData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .plain, target: self, action: #selector(simulate))
@@ -161,14 +179,21 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let count = messages?.count {
+        
+        if let count = fetchedResultsController.sections?[0].numberOfObjects {
             return count
         }
+        
+        //if let count = messages?.count {
+        //return count
+        //}
         return 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ChatLogMessageCell
+        
+        let message = fetchedResultsController.object(at: indexPath) as! Message
         
         cell.messageTextView.text = messages?[indexPath.item].text
         if let message = messages?[indexPath.item], let messageText = message.text {
@@ -199,8 +224,8 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 
                 //cell.textBubbleView.backgroundColor = UIColor.FinnMaroonBlur()
                 cell.bubbleImageView.image = ChatLogMessageCell.blueBubbleImage
-                cell.bubbleImageView.tintColor = UIColor.FinnMaroonBlur()
-                cell.messageTextView.textColor = UIColor.white
+                cell.bubbleImageView.tintColor = UIColor.MonalogGreen()
+                cell.messageTextView.textColor = UIColor.black
                 
                 
             }
