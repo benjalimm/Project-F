@@ -82,6 +82,8 @@ extension FinnController {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "Message")
             fetchRequest.sortDescriptors = [NSSortDescriptor(key: "date", ascending: false)]
+            fetchRequest.fetchBatchSize = 15
+            
             do {
                 messages = try (context.fetch(fetchRequest)) as? [Message]
                 

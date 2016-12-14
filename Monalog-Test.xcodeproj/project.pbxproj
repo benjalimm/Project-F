@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		790068401E014A4700DBC6F3 /* FinnControllerSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */; };
 		793FC7101DFE5F4B0033747C /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC70F1DFE5F4B0033747C /* extensions.swift */; };
 		797EEF9B1DFA774B005D2743 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEF9A1DFA774B005D2743 /* AppDelegate.swift */; };
 		797EEF9D1DFA774B005D2743 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEF9C1DFA774B005D2743 /* ViewController.swift */; };
@@ -25,6 +26,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnControllerSpeech.swift; sourceTree = "<group>"; };
 		793FC70F1DFE5F4B0033747C /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		797EEF971DFA774B005D2743 /* Monalog-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monalog-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		797EEF9A1DFA774B005D2743 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 				797EEFB11DFB0204005D2743 /* FinnController.swift */,
 				797EEFC51DFD22FE005D2743 /* FinnControllerHelper.swift */,
 				793FC70F1DFE5F4B0033747C /* extensions.swift */,
+				7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */,
 			);
 			path = "Monalog-Test";
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				790068401E014A4700DBC6F3 /* FinnControllerSpeech.swift in Sources */,
 				797EEFB21DFB0204005D2743 /* FinnController.swift in Sources */,
 				797EEFC41DFD1FAD005D2743 /* Post+CoreDataClass.swift in Sources */,
 				797EEFBA1DFBE559005D2743 /* Post+CoreDataProperties.swift in Sources */,

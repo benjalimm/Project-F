@@ -8,8 +8,10 @@
 
 import UIKit
 import CoreData
+import Speech
 
-class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+
+class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLayout, SFSpeechRecognizerDelegate {
     
     private let cellId = "cellId"
     
@@ -21,7 +23,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return view
     }()
     
-    let inputTextField: UITextField = {
+    var inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "Enter message"
         return textField
@@ -32,6 +34,12 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         button.setImage(UIImage(named: "send"), for: .normal)
         button.tintColor = UIColor.FinnMaroon()
         button.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
+        return button
+    }()
+    
+    let micButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "mic_button"), for: .normal)
         return button
     }()
     
@@ -53,6 +61,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             
             collectionView?.insertItems(at: [insertionIndexPath])
             collectionView?.scrollToItem(at: insertionIndexPath, at: .top, animated: true)
+            inputTextField.text = nil
         } catch let err {
             print (err)
         }
@@ -95,6 +104,90 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         return frc as! NSFetchedResultsController<Message>
     }()
+    //MARK: Speech recogniser instatiations
+    
+    private let speechRecognizer = SFSpeechRecognizer()!
+    
+    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    
+    private var recognitionTask: SFSpeechRecognitionTask?
+    
+    private let audioEngine = AVAudioEngine()
+    
+    public func askPermission() {
+        
+    }
+    
+    // MARK: START RECORDING
+    func startRecording() throws {
+        
+        // cancel previous tasks if they are running
+        if let recognitionTask = recognitionTask {
+            recognitionTask.cancel()
+            self.recognitionTask = nil
+        }
+        
+        let audioSession = AVAudioSession.sharedInstance()
+        try audioSession.setCategory(AVAudioSessionCategoryRecord)
+        try audioSession.setMode(AVAudioSessionModeMeasurement)
+        try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        
+        recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
+        
+        guard let inputNode = audioEngine.inputNode else { fatalError("Audio Engine has no input node") }
+        guard let recognitionRequest = recognitionRequest else { fatalError("Unable to create a SFSpeechAudioBufferRecognitionRequest object") }
+        
+        // Configure request so that results are returned before audio recording is finished
+        recognitionRequest.shouldReportPartialResults = true
+        
+        // A recognition task represents a speech recognition session. A reference is kept to the task so that it can be cancelled
+        
+        recognitionTask = speechRecognizer.recognitionTask(with: recognitionRequest) {
+            (result, error) in
+            
+            var isFinal = false
+            
+            if let result = result {
+                self.inputTextField.text = result.bestTranscription.formattedString
+                isFinal = result.isFinal
+            }
+            
+            if error != nil || isFinal {
+                self.audioEngine.stop()
+                inputNode.removeTap(onBus: 0)
+                self.recognitionTask = nil
+                
+                self.micButton.isEnabled = true
+                self.micButton.setTitle("Start Recording", for: [])
+            }
+            
+        }
+        
+        let recordingFormat = inputNode.outputFormat(forBus: 0)
+        inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { (buffer:AVAudioPCMBuffer, when:AVAudioTime) in
+            
+            self.recognitionRequest?.append(buffer)
+        }
+        
+        audioEngine.prepare()
+        
+        try audioEngine.start()
+        
+        inputTextField.text = "(Go ahead, im listening)"
+
+    }
+    
+    func recordButtonTapped() {
+        if audioEngine.isRunning {
+            audioEngine.stop()
+            recognitionRequest?.endAudio()
+            micButton.isEnabled = false
+            micButton.setTitle("Stopping", for: .disabled)
+        } else {
+            try! startRecording()
+            micButton.setTitle("Stop Recording", for: [])
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,6 +202,11 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setupData()
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .plain, target: self, action: #selector(simulate))
+        
+        micButton.isEnabled = false
+        let micImage = UIImage(named: "mic_button")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: micImage, landscapeImagePhone: micImage, style: .plain, target: self, action: #selector(recordButtonTapped))
+        
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
@@ -258,6 +356,37 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return UIEdgeInsets(top: 8, left: 0, bottom: 49, right: 0)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        speechRecognizer.delegate = self
+        
+        SFSpeechRecognizer.requestAuthorization { (authStatus) in
+            OperationQueue.main.addOperation {
+                
+                switch authStatus {
+                case .authorized:
+                    self.micButton.isEnabled = true
+                    
+                    
+                case .denied:
+                    self.micButton.isEnabled = false
+                    self.micButton.setTitle("User denied access to speech recognition", for: .disabled)
+                    
+                case .restricted:
+                    
+                    self.micButton.isEnabled = false
+                    self.micButton.setTitle("Speech Recognition Restricted", for: .disabled)
+                    
+                case .notDetermined:
+                    
+                    self.micButton.isEnabled = false
+                    self.micButton.setTitle("Speech recognition not authorised", for: .disabled)
+                    
+                }
+            }
+            
+        }
+    }
+    
 }
 
 class ChatLogMessageCell: BaseCell {
@@ -321,7 +450,5 @@ class ChatLogMessageCell: BaseCell {
 
 
     }
-    
-    
     
 }
