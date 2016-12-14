@@ -46,7 +46,24 @@ extension UIView {
 }
 
 
-extension UIColor {
+extension FinnController {
     
+    func speechViewFadeIn() {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            
+            self.micView.alpha = 0.9
+            
+            }, completion: nil)
+    }
+    
+    func speechViewFadeOut() {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+            
+            self.micView.alpha = 0
+            
+            }, completion: nil)
+    }
     
 }

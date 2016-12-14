@@ -43,6 +43,21 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return button
     }()
     
+    let micView: UIView = {
+        let view = UIView(frame: UIScreen.main.bounds)
+        view.backgroundColor = UIColor.white
+        
+        return view
+    }()
+    
+    var micTextView: UITextField = {
+        let textView = UITextField(frame: UIScreen.main.bounds)
+        textView.textColor = UIColor.black
+        textView.font = UIFont.systemFont(ofSize: 18)
+        textView.font = UIFont.boldSystemFont(ofSize: 20)
+        return textView
+    }()
+    
     func handleSend() {
         print(inputTextField.text)
         
@@ -62,6 +77,31 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             collectionView?.insertItems(at: [insertionIndexPath])
             collectionView?.scrollToItem(at: insertionIndexPath, at: .top, animated: true)
             inputTextField.text = nil
+        } catch let err {
+            print (err)
+        }
+        
+    }
+    
+    func speechSend() {
+        print(micTextView.text)
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        
+        let message = FinnController.createMessageWithText(text: micTextView.text!, minutesAgo: 0, context: context, isSender: true)
+        
+        do {
+            try context.save()
+            
+            messages?.append(message)
+            
+            let item = messages!.count - 1
+            let insertionIndexPath = IndexPath(item: item, section: 0)
+            
+            collectionView?.insertItems(at: [insertionIndexPath])
+            collectionView?.scrollToItem(at: insertionIndexPath, at: .top, animated: true)
+            micTextView.text = nil
         } catch let err {
             print (err)
         }
@@ -148,7 +188,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             var isFinal = false
             
             if let result = result {
-                self.inputTextField.text = result.bestTranscription.formattedString
+                self.micTextView.text = result.bestTranscription.formattedString
                 isFinal = result.isFinal
             }
             
@@ -173,17 +213,21 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         try audioEngine.start()
         
-        inputTextField.text = "(Go ahead, im listening)"
+        micTextView.text = "(Go ahead, im listening)"
 
     }
     
     func recordButtonTapped() {
         if audioEngine.isRunning {
+            speechViewFadeOut()
             audioEngine.stop()
             recognitionRequest?.endAudio()
             micButton.isEnabled = false
             micButton.setTitle("Stopping", for: .disabled)
+            speechSend()
         } else {
+            speechViewFadeIn()
+            //self.micView.alpha = 0.9
             try! startRecording()
             micButton.setTitle("Stop Recording", for: [])
         }
@@ -201,20 +245,30 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setupData()
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Simulate", style: .plain, target: self, action: #selector(simulate))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Simulate", style: .plain, target: self, action: #selector(simulate))
         
         micButton.isEnabled = false
         let micImage = UIImage(named: "mic_button")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: micImage, landscapeImagePhone: micImage, style: .plain, target: self, action: #selector(recordButtonTapped))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: micImage, landscapeImagePhone: micImage, style: .plain, target: self, action: #selector(recordButtonTapped))
         
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
         collectionView?.register(ChatLogMessageCell.self, forCellWithReuseIdentifier: cellId)
         
+        
         view.addSubview(messageInputContainerView)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: messageInputContainerView)
         view.addConstraintsWithFormat(format: "V:[v0(48)]", views: messageInputContainerView)
+        
+        view.addSubview(micView)
+
+        micView.alpha = 0
+        micView.addSubview(micTextView)
+        //micView.addConstraintsWithFormat(format: "H:|-8-[v0]", views: micTextView)
+        //micView.addConstraintsWithFormat(format: "V:[v0]|", views: micTextView)
+
+
 
         bottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         view.addConstraint(bottomConstraint!)
@@ -271,8 +325,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: inputTextField)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
-
-
 
     }
     
