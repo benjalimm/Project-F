@@ -78,4 +78,9 @@ extension FinnController {
             }, completion: nil)
     }
     
+    func playSound() {
+        audioPlayer.play()
+        print("Sound Played")
+    }
+    
 }

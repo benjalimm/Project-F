@@ -21,7 +21,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setupData()
 
-        navigationItem.title = "FINNPUT"
+        navigationItem.title = "FINN"
         
         collectionView?.alwaysBounceVertical = true
         

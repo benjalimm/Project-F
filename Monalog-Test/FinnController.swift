@@ -10,7 +10,6 @@ import UIKit
 import CoreData
 import Speech
 
-
 class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLayout, SFSpeechRecognizerDelegate {
     
     private let cellId = "cellId"
@@ -25,21 +24,23 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     var inputTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "Enter message"
+        textField.placeholder = "How much have you spent today?.."
         return textField
     }()
     
     lazy var sendButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "send"), for: .normal)
-        button.tintColor = UIColor.FinnMaroon()
+        button.tintColor = UIColor.black
         button.addTarget(self, action: #selector(handleSend), for: .touchUpInside)
         return button
     }()
     
     let micButton: UIButton = {
-        let button = UIButton(type: .system)
+        let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "mic_button"), for: .normal)
+        button.tintColor = UIColor.FinnMaroon()
+        button.setTitle("", for: .normal)
         return button
     }()
     
@@ -72,11 +73,16 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return imageView
     }()
     
-    let finnHelpText: UITextView = {
-        let textView = UITextView()
-        textView.text = "How can I help you today?.."
-        return textView
+    let finnHelpText: UITextField = {
+        let textField = UITextField()
+        textField.text = "How can I help you today?.."
+        textField.isEnabled = false
+        textField.font = UIFont.boldSystemFont(ofSize: 15)
+        return textField
     }()
+    
+    var url = NSURL(fileURLWithPath: Bundle.main.path(forResource: "pop_drip.wav", ofType: nil)!)
+    var audioPlayer = AVAudioPlayer()
     
     // Speech pop-up end//
     
@@ -111,7 +117,11 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
         
-        let message = FinnController.createMessageWithText(text: micTextView.text!, minutesAgo: 0, context: context, isSender: true)
+        if micTextView.text == nil {
+            return
+            
+        } else if (micTextView.text != nil) {
+            let message = FinnController.createMessageWithText(text: micTextView.text!, minutesAgo: 0, context: context, isSender: true)
         
         do {
             try context.save()
@@ -127,7 +137,8 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         } catch let err {
             print (err)
         }
-        
+        }
+    
     }
     
     var bottomConstraint: NSLayoutConstraint?
@@ -241,6 +252,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     func recordButtonTapped() {
         if audioEngine.isRunning {
+            playSound()
             speechViewFadeOut()
             audioEngine.stop()
             recognitionRequest?.endAudio()
@@ -248,6 +260,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             micButton.setTitle("Stopping", for: .disabled)
             speechSend()
         } else {
+            playSound()
             speechViewFadeIn()
             //self.micView.alpha = 0.9
             try! startRecording()
@@ -264,6 +277,17 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         } catch let err {
             print (err)
         }
+        
+        // setting up audio
+        
+        do {
+            let sound = try AVAudioPlayer(contentsOf: url as URL)
+            audioPlayer = sound
+            audioPlayer.prepareToPlay()
+        } catch let err {
+            print (err)
+        }
+        
         
         setupData()
         
@@ -295,7 +319,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         micView.addConstraintsWithFormat(format: "H:|-10-[v0(60)]-8-[v1]", views: finnFace,finnHelpText)
         
         micView.addConstraintsWithFormat(format: "V:|-70-[v0(60)]", views: finnFace)
-        micView.addConstraintsWithFormat(format: "V:|-70-[v0]", views: finnHelpText)
+        micView.addConstraintsWithFormat(format: "V:|-90-[v0]", views: finnHelpText)
 
 
         //micView.addConstraintsWithFormat(format: "H:|-8-[v0]", views: micTextView)
@@ -355,10 +379,13 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendButton)
+        messageInputContainerView.addSubview(micButton)
         
-        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
+        messageInputContainerView.addConstraintsWithFormat(format: "H:|[v0(40)]-1-[v1][v2(60)]|", views: micButton, inputTextField, sendButton)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: inputTextField)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
+        
+        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: micButton)
 
     }
     
@@ -472,7 +499,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             
         }
     }
-    
+
 
     
 }
