@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 extension UIColor {
     
@@ -79,8 +80,27 @@ extension FinnController {
     }
     
     func playSound() {
-        audioPlayer.play()
-        print("Sound Played")
+        
+        guard let url = Bundle.main.url(forResource: "pop-drip", withExtension: "wav") else {
+            print ("url not found")
+            return
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeWAVE)
+            
+            player!.play()
+            
+        } catch let err {
+            print (err)
+        }
+        
+        
+        
+
     }
     
 }

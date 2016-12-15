@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		790068401E014A4700DBC6F3 /* FinnControllerSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */; };
-		790068461E02493000DBC6F3 /* pop_drip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 790068451E02493000DBC6F3 /* pop_drip.wav */; };
+		790068481E02AF1C00DBC6F3 /* pop-drip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 790068471E02AF1C00DBC6F3 /* pop-drip.wav */; };
 		793FC7101DFE5F4B0033747C /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC70F1DFE5F4B0033747C /* extensions.swift */; };
 		797EEF9B1DFA774B005D2743 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEF9A1DFA774B005D2743 /* AppDelegate.swift */; };
 		797EEF9D1DFA774B005D2743 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEF9C1DFA774B005D2743 /* ViewController.swift */; };
@@ -28,7 +28,7 @@
 
 /* Begin PBXFileReference section */
 		7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnControllerSpeech.swift; sourceTree = "<group>"; };
-		790068451E02493000DBC6F3 /* pop_drip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = pop_drip.wav; sourceTree = "<group>"; };
+		790068471E02AF1C00DBC6F3 /* pop-drip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pop-drip.wav"; sourceTree = "<group>"; };
 		793FC70F1DFE5F4B0033747C /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		797EEF971DFA774B005D2743 /* Monalog-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monalog-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		797EEF9A1DFA774B005D2743 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,7 +62,7 @@
 		790068441E02491A00DBC6F3 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
-				790068451E02493000DBC6F3 /* pop_drip.wav */,
+				790068471E02AF1C00DBC6F3 /* pop-drip.wav */,
 			);
 			name = "Supporting files";
 			path = ..;
@@ -170,9 +170,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				797EEFA81DFA774B005D2743 /* LaunchScreen.storyboard in Resources */,
-				790068461E02493000DBC6F3 /* pop_drip.wav in Resources */,
 				797EEFA51DFA774B005D2743 /* Assets.xcassets in Resources */,
 				797EEFA01DFA774B005D2743 /* Main.storyboard in Resources */,
+				790068481E02AF1C00DBC6F3 /* pop-drip.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -81,8 +81,8 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return textField
     }()
     
-    var url = NSURL(fileURLWithPath: Bundle.main.path(forResource: "pop_drip.wav", ofType: nil)!)
-    var audioPlayer = AVAudioPlayer()
+    //var url = NSURL(fileURLWithPath: Bundle.main.path(forResource: "pop_drip.wav", ofType: nil)!)
+    var player: AVAudioPlayer?
     
     // Speech pop-up end//
     
@@ -193,7 +193,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     // MARK: START RECORDING
     func startRecording() throws {
-        
+   
         // cancel previous tasks if they are running
         if let recognitionTask = recognitionTask {
             recognitionTask.cancel()
@@ -262,7 +262,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         } else {
             playSound()
             speechViewFadeIn()
-            //self.micView.alpha = 0.9
             try! startRecording()
             micButton.setTitle("Stop Recording", for: [])
         }
@@ -278,15 +277,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             print (err)
         }
         
-        // setting up audio
         
-        do {
-            let sound = try AVAudioPlayer(contentsOf: url as URL)
-            audioPlayer = sound
-            audioPlayer.prepareToPlay()
-        } catch let err {
-            print (err)
-        }
         
         
         setupData()
