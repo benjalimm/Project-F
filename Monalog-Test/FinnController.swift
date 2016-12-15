@@ -43,9 +43,12 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return button
     }()
     
+    //Speech pop-up//
+    
     let micView: UIView = {
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = UIColor.white
+        view.alpha = 0.97
         
         return view
     }()
@@ -54,9 +57,28 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let textView = UITextField(frame: UIScreen.main.bounds)
         textView.textColor = UIColor.black
         textView.font = UIFont.systemFont(ofSize: 18)
-        textView.font = UIFont.boldSystemFont(ofSize: 20)
+        textView.font = UIFont.boldSystemFont(ofSize: 21)
+        textView.isEnabled = false 
         return textView
     }()
+    
+    let finnFace: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.layer.cornerRadius = 30
+        imageView.layer.masksToBounds = true
+        imageView.backgroundColor = UIColor.FinnBlue()
+        imageView.image = UIImage(named: "Finn")
+        return imageView
+    }()
+    
+    let finnHelpText: UITextView = {
+        let textView = UITextView()
+        textView.text = "How can I help you today?.."
+        return textView
+    }()
+    
+    // Speech pop-up end//
     
     func handleSend() {
         print(inputTextField.text)
@@ -213,7 +235,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         try audioEngine.start()
         
-        micTextView.text = "(Go ahead, im listening)"
+        micTextView.placeholder = "(Go ahead, im listening)"
 
     }
     
@@ -263,8 +285,19 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         view.addSubview(micView)
 
-        micView.alpha = 0
+        //micView.alpha = 0
+        let bottom = UIScreen.main.bounds.height
+        micView.transform = CGAffineTransform(translationX: 0 , y: bottom)
+
         micView.addSubview(micTextView)
+        micView.addSubview(finnFace)
+        micView.addSubview(finnHelpText)
+        micView.addConstraintsWithFormat(format: "H:|-10-[v0(60)]-8-[v1]", views: finnFace,finnHelpText)
+        
+        micView.addConstraintsWithFormat(format: "V:|-70-[v0(60)]", views: finnFace)
+        micView.addConstraintsWithFormat(format: "V:|-70-[v0]", views: finnHelpText)
+
+
         //micView.addConstraintsWithFormat(format: "H:|-8-[v0]", views: micTextView)
         //micView.addConstraintsWithFormat(format: "V:[v0]|", views: micTextView)
 
@@ -319,6 +352,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     private func setupInputComponents() {
+        
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendButton)
         
@@ -438,6 +472,8 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             
         }
     }
+    
+
     
 }
 

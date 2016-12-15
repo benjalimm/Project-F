@@ -31,6 +31,9 @@ extension UIColor {
         return UIColor(red: 207/255, green: 238/255, blue: 212/255, alpha: 0.5)
     }
     
+    static func Cream() -> UIColor {
+        return UIColor(red: 251/255, green: 255/255, blue: 230/255, alpha: 1)
+    }
 }
 
 extension UIView {
@@ -48,20 +51,29 @@ extension UIView {
 
 extension FinnController {
     
+    
     func speechViewFadeIn() {
         
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             
-            self.micView.alpha = 0.9
+            //self.micView.alpha = 0.9
+            //self.micTextView.alpha = 1
+            //self.micButton.tintColor = UIColor.red
+            
+            self.micView.transform = CGAffineTransform(translationX: 0 , y: 0)
             
             }, completion: nil)
     }
     
     func speechViewFadeOut() {
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: UIViewAnimationOptions.curveEaseIn, animations: {
+        let bottom = UIScreen.main.bounds.height
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             
-            self.micView.alpha = 0
+            //self.micView.alpha = 0
+            //self.micTextView.alpha = 0
+            //self.micButton.tintColor = UIColor.blue
+            self.micView.transform = CGAffineTransform(translationX: 0 , y: bottom)
+
             
             }, completion: nil)
     }
