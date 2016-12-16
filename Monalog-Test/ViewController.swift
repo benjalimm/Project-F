@@ -15,6 +15,14 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     var posts:[Post]?
     
+    let collectionViewFlowLayout: UICollectionViewFlowLayout = {
+        let layout = UICollectionViewFlowLayout()
+        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        return layout
+    }()
+    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,8 +36,10 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+    
+        collectionView?.collectionViewLayout = collectionViewFlowLayout
+ 
         
-        // Do any additional setup after loading the view, typically from a nib.
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -51,6 +61,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
 
         return CGSize(width: view.frame.width, height: 60)
     }
@@ -77,8 +88,6 @@ class FeedCell: BaseCell {
     let nameLabel = { () -> UILabel in
         let label = UILabel()
         label.numberOfLines = 2
-        
-        
         return label
     }()
     
@@ -107,7 +116,7 @@ class FeedCell: BaseCell {
     
     let dividerLineView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.rgb(red: 226, green: 228, blue: 232)
+        view.backgroundColor = UIColor.gray
         return view
     }()
     
@@ -130,12 +139,17 @@ class FeedCell: BaseCell {
         //subviews
         addSubview(itemTextView)
         addSubview(costTextView)
+        addSubview(dividerLineView)
     
         addConstraintsWithFormat(format: "H:|-20-[v0]", views: itemTextView)
         addConstraintsWithFormat(format: "H:[v0]-20-|", views: costTextView)
         
         addConstraintsWithFormat(format: "V:[v0]", views: itemTextView)
         addConstraintsWithFormat(format: "V:[v0]", views: costTextView)
+        
+        addConstraintsWithFormat(format: "H:|[v0]|", views: dividerLineView)
+        addConstraintsWithFormat(format: "V:[v0(0.5)]|", views: dividerLineView)
+
         
         addConstraint(NSLayoutConstraint(item: itemTextView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
         addConstraint(NSLayoutConstraint(item: costTextView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))

@@ -44,6 +44,11 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return button
     }()
     
+    var micOrSendButton: UIButton = {
+        let button = UIButton()
+        return button
+    }()
+    
     //Speech pop-up//
     
     let micView: UIView = {
@@ -56,11 +61,13 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     var micTextView: UITextView = {
         let textView = UITextView(frame: UIScreen.main.bounds)
-        textView.textColor = UIColor.FinnMaroon()
+        textView.textColor = UIColor.black
         textView.font = UIFont.systemFont(ofSize: 21)
         let navigationController = UINavigationController()
-        let yHeight = UIApplication.shared.statusBarFrame.height + navigationController.navigationBar.frame.height + 60
+        let yHeight = UIApplication.shared.statusBarFrame.height + navigationController.navigationBar.frame.height + 70
         textView.frame = CGRect(x: 7, y: yHeight , width: UIScreen.main.bounds.width - 7, height: UIScreen.main.bounds.height)
+        textView.isEditable = false
+        textView.isUserInteractionEnabled = false
         return textView
     }()
     
@@ -70,19 +77,19 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         imageView.layer.cornerRadius = 30
         imageView.layer.masksToBounds = true
         imageView.backgroundColor = UIColor.FinnBlue()
-        imageView.image = UIImage(named: "Finn")
+        imageView.image = UIImage(named: "FinnBig")
         return imageView
     }()
     
     let finnHelpText: UITextField = {
         let textField = UITextField()
-        textField.text = "How can I help you today?.."
+        textField.text = "How can I help you buddy?.."
         textField.isEnabled = false
         textField.font = UIFont.boldSystemFont(ofSize: 15)
+        textField.textColor = UIColor.gray
         return textField
     }()
     
-    //var url = NSURL(fileURLWithPath: Bundle.main.path(forResource: "pop_drip.wav", ofType: nil)!)
     var player: AVAudioPlayer?
     
     // Speech pop-up end//
@@ -93,6 +100,10 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
         
+        
+        if (inputTextField.text?.isEmpty)! {
+            return
+        } else {
         let message = FinnController.createMessageWithText(text: inputTextField.text!, minutesAgo: 0, context: context, isSender: true)
         
         do {
@@ -109,6 +120,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         } catch let err {
             print (err)
         }
+    }
         
     }
     
@@ -335,9 +347,10 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         micView.addSubview(finnHelpText)
         micView.addConstraintsWithFormat(format: "H:|-10-[v0(60)]-8-[v1]", views: finnFace,finnHelpText)
         
-        micView.addConstraintsWithFormat(format: "V:|-70-[v0(60)]", views: finnFace)
-        micView.addConstraintsWithFormat(format: "V:|-90-[v0]", views: finnHelpText)
-
+        let verticalGap = UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height)! + 10
+        micView.addConstraintsWithFormat(format: "V:|-\(verticalGap)-[v0(60)]", views: finnFace)
+        micView.addConstraintsWithFormat(format: "V:|-\(verticalGap + 20)-[v0]", views: finnHelpText)
+        
 
         //micView.addConstraintsWithFormat(format: "H:|-8-[v0]", views: micTextView)
         //micView.addConstraintsWithFormat(format: "V:[v0]|", views: micTextView)
@@ -358,7 +371,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let indexPath = IndexPath(item: self.messages!.count - 1, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
 
-    
         }
     
     func handleKeyboardNotification(notification: NSNotification) {
@@ -396,13 +408,10 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         messageInputContainerView.addSubview(inputTextField)
         messageInputContainerView.addSubview(sendButton)
-        messageInputContainerView.addSubview(micButton)
         
-        messageInputContainerView.addConstraintsWithFormat(format: "H:|[v0(40)]-1-[v1][v2(60)]|", views: micButton, inputTextField, sendButton)
+        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: inputTextField)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
-        
-        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: micButton)
 
     }
     
@@ -516,9 +525,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             
         }
     }
-
-
-    
+   
 }
 
 class ChatLogMessageCell: BaseCell {

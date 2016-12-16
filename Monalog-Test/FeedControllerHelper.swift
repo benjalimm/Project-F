@@ -45,18 +45,6 @@ extension FeedController {
         let delegate = UIApplication.shared.delegate as? AppDelegate
         
         if let context = delegate?.persistentContainer.viewContext {
-
-            //let postPetrol = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context) as! Post
-            //postPetrol.item = "Petrol"
-            //postPetrol.cost = 55.76
-            //postPetrol.date = NSDate()
-            //postPetrol.user = ben
-            
-            //let postShirt = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context) as! Post
-            //postShirt.item = "Ralph Lauren Shirt"
-            //postShirt.cost = 120
-            //postPetrol.date = NSDate()
-            //postPetrol.user = ben
             
             createPostWithText(item: "Gas", cost: 45, minutesAgo: 1, context: context)
             createPostWithText(item: "Books", cost: 22, minutesAgo: 2, context: context)
