@@ -54,12 +54,13 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return view
     }()
     
-    var micTextView: UITextField = {
-        let textView = UITextField(frame: UIScreen.main.bounds)
-        textView.textColor = UIColor.black
-        textView.font = UIFont.systemFont(ofSize: 18)
-        textView.font = UIFont.boldSystemFont(ofSize: 21)
-        textView.isEnabled = false 
+    var micTextView: UITextView = {
+        let textView = UITextView(frame: UIScreen.main.bounds)
+        textView.textColor = UIColor.FinnMaroon()
+        textView.font = UIFont.systemFont(ofSize: 21)
+        let navigationController = UINavigationController()
+        let yHeight = UIApplication.shared.statusBarFrame.height + navigationController.navigationBar.frame.height + 60
+        textView.frame = CGRect(x: 7, y: yHeight , width: UIScreen.main.bounds.width - 7, height: UIScreen.main.bounds.height)
         return textView
     }()
     
@@ -112,33 +113,38 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func speechSend() {
+        playSound()
         print(micTextView.text)
         
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
         
-        if micTextView.text == nil {
+        if micTextView.text.isEmpty {
             return
             
-        } else if (micTextView.text != nil) {
+        } else if (micTextView.text != "(Go ahead, im listening...)") {
+            
+            
             let message = FinnController.createMessageWithText(text: micTextView.text!, minutesAgo: 0, context: context, isSender: true)
+            
+            do {
+                try context.save()
+                
+                messages?.append(message)
+                
+                let item = messages!.count - 1
+                let insertionIndexPath = IndexPath(item: item, section: 0)
+                
+                collectionView?.insertItems(at: [insertionIndexPath])
+                collectionView?.scrollToItem(at: insertionIndexPath, at: .top, animated: true)
+                micTextView.text = nil
+            } catch let err {
+                print (err)
+            }
+        } else {
+            return
+        }
         
-        do {
-            try context.save()
-            
-            messages?.append(message)
-            
-            let item = messages!.count - 1
-            let insertionIndexPath = IndexPath(item: item, section: 0)
-            
-            collectionView?.insertItems(at: [insertionIndexPath])
-            collectionView?.scrollToItem(at: insertionIndexPath, at: .top, animated: true)
-            micTextView.text = nil
-        } catch let err {
-            print (err)
-        }
-        }
-    
     }
     
     var bottomConstraint: NSLayoutConstraint?
@@ -200,10 +206,30 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             self.recognitionTask = nil
         }
         
+        guard let url = Bundle.main.url(forResource: "pop-drip", withExtension: "wav") else {
+            print ("url not found")
+            return
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+            player = try AVAudioPlayer(contentsOf: url)
+            
+            player!.play()
+            print ("pop-drip sound played")
+            
+        } catch let err {
+            print (err)
+        }
+        
         let audioSession = AVAudioSession.sharedInstance()
         try audioSession.setCategory(AVAudioSessionCategoryRecord)
         try audioSession.setMode(AVAudioSessionModeMeasurement)
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
+        
+        
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
@@ -246,13 +272,13 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         try audioEngine.start()
         
-        micTextView.placeholder = "(Go ahead, im listening)"
+        micTextView.text = "(Go ahead, im listening...)"
 
     }
     
     func recordButtonTapped() {
         if audioEngine.isRunning {
-            playSound()
+            //playSound()
             speechViewFadeOut()
             audioEngine.stop()
             recognitionRequest?.endAudio()
@@ -260,7 +286,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             micButton.setTitle("Stopping", for: .disabled)
             speechSend()
         } else {
-            playSound()
+            //playSound()
             speechViewFadeIn()
             try! startRecording()
             micButton.setTitle("Stop Recording", for: [])

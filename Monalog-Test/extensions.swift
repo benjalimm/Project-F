@@ -57,9 +57,6 @@ extension FinnController {
         
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             
-            //self.micView.alpha = 0.9
-            //self.micTextView.alpha = 1
-            //self.micButton.tintColor = UIColor.red
             
             self.micView.transform = CGAffineTransform(translationX: 0 , y: 0)
             
@@ -70,9 +67,7 @@ extension FinnController {
         let bottom = UIScreen.main.bounds.height
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             
-            //self.micView.alpha = 0
-            //self.micTextView.alpha = 0
-            //self.micButton.tintColor = UIColor.blue
+        
             self.micView.transform = CGAffineTransform(translationX: 0 , y: bottom)
 
             
@@ -90,9 +85,10 @@ extension FinnController {
             try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
             try AVAudioSession.sharedInstance().setActive(true)
             
-            player = try AVAudioPlayer(contentsOf: url, fileTypeHint: AVFileTypeWAVE)
+            player = try AVAudioPlayer(contentsOf: url)
             
             player!.play()
+            print ("pop-drip sound played")
             
         } catch let err {
             print (err)
