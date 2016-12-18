@@ -125,7 +125,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func speechSend() {
-        playSound()
         print(micTextView.text)
         
         let delegate = UIApplication.shared.delegate as! AppDelegate
@@ -218,29 +217,10 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             self.recognitionTask = nil
         }
         
-        guard let url = Bundle.main.url(forResource: "pop-drip", withExtension: "wav") else {
-            print ("url not found")
-            return
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            player = try AVAudioPlayer(contentsOf: url)
-            
-            player!.play()
-            print ("pop-drip sound played")
-            
-        } catch let err {
-            print (err)
-        }
-        
         let audioSession = AVAudioSession.sharedInstance()
         try audioSession.setCategory(AVAudioSessionCategoryRecord)
         try audioSession.setMode(AVAudioSessionModeMeasurement)
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
-        
         
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
@@ -287,10 +267,14 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         micTextView.text = "(Go ahead, im listening...)"
 
     }
-    
     func recordButtonTapped() {
+        let queue = DispatchQueue(label: "com.finn.app", qos: .userInteractive)
+
+        
         if audioEngine.isRunning {
-            //playSound()
+            queue.async {
+                self.playSound()
+            }
             speechViewFadeOut()
             audioEngine.stop()
             recognitionRequest?.endAudio()
@@ -298,7 +282,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             micButton.setTitle("Stopping", for: .disabled)
             speechSend()
         } else {
-            //playSound()
             speechViewFadeIn()
             try! startRecording()
             micButton.setTitle("Stop Recording", for: [])

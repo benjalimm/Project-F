@@ -22,6 +22,22 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return layout
     }()
     
+    let addButton: UIButton = {
+        let button = UIButton(type: .custom)
+        button.contentMode = .scaleAspectFill
+        button.layer.cornerRadius = 20
+        button.layer.masksToBounds = true
+        button.setImage(UIImage(named: "addButton"), for: .normal)
+        button.tintColor = UIColor.black
+        button.backgroundColor = UIColor.FinnGreen()
+        button.setTitle("", for: .normal)
+        button.layer.shadowColor = UIColor.gray.cgColor
+        button.layer.shadowOffset = CGSize(width: 3, height: 1)
+        button.layer.shadowOpacity = 1
+        button.layer.shadowRadius = 0
+        return button
+    }()
+    
 
     
     override func viewDidLoad() {
@@ -38,6 +54,16 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
     
         collectionView?.collectionViewLayout = collectionViewFlowLayout
+        
+        collectionView?.dataSource = self
+        
+        collectionView?.delegate = self
+        
+        view.addSubview(addButton)
+        view.addConstraintsWithFormat(format: "H:[v0]-20-|", views: addButton)
+        view.addConstraintsWithFormat(format: "V:[v0]-10-|", views: addButton)
+
+
  
         
     }
@@ -85,13 +111,13 @@ class FeedCell: BaseCell {
         }
     }
     
+    
+    
     let nameLabel = { () -> UILabel in
         let label = UILabel()
         label.numberOfLines = 2
         return label
     }()
-    
-    
     
     let itemTextView: UILabel = {
         let textView = UILabel()

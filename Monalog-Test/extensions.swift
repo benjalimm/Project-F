@@ -32,6 +32,10 @@ extension UIColor {
         return UIColor(red: 207/255, green: 238/255, blue: 212/255, alpha: 0.5)
     }
     
+    static func FinnGreen() -> UIColor {
+        return UIColor(red: 207/255, green: 238/255, blue: 212/255, alpha: 1)
+    }
+    
     static func Cream() -> UIColor {
         return UIColor(red: 251/255, green: 255/255, blue: 230/255, alpha: 1)
     }
@@ -54,7 +58,8 @@ extension FinnController {
     
     
     func speechViewFadeIn() {
-        
+
+
         UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
             
             
@@ -75,28 +80,26 @@ extension FinnController {
     }
     
     func playSound() {
-        
-        guard let url = Bundle.main.url(forResource: "pop-drip", withExtension: "wav") else {
-            print ("url not found")
-            return
-        }
-        
-        do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
-            try AVAudioSession.sharedInstance().setActive(true)
-            
-            player = try AVAudioPlayer(contentsOf: url)
-            
-            player!.play()
-            print ("pop-drip sound played")
-            
-        } catch let err {
-            print (err)
-        }
-        
-        
-        
 
+            guard let url = Bundle.main.url(forResource: "pop-drip", withExtension: "wav") else {
+                print ("url not found")
+                return
+            }
+            
+            do {
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+                try AVAudioSession.sharedInstance().setActive(true)
+                
+                self.player = try AVAudioPlayer(contentsOf: url)
+                
+                self.player!.play()
+                print ("pop-drip sound played")
+                
+            } catch let err {
+                print (err)
+            }
+
+        
     }
     
 }

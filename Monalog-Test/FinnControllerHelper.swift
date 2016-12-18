@@ -63,6 +63,8 @@ extension FinnController {
         return message 
     }
     
+    
+    
     private func createFinnMessagesWithContext(context: NSManagedObjectContext) {
         FinnController.createMessageWithText(text: "Hey there I'm Finn!", minutesAgo: 5, context: context)
         FinnController.createMessageWithText(text: "Test Message Test Message Test Message Test Message Test Message Test Message!", minutesAgo: 4, context: context)
