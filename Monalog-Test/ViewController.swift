@@ -38,6 +38,13 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return button
     }()
     
+    let addView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 100, y: 0, width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height / 2)
+                view.backgroundColor = UIColor.lightGray
+        view.alpha = 0.97
+        return view
+    }()
 
     
     override func viewDidLoad() {
@@ -62,6 +69,15 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addSubview(addButton)
         view.addConstraintsWithFormat(format: "H:[v0]-20-|", views: addButton)
         view.addConstraintsWithFormat(format: "V:[v0]-10-|", views: addButton)
+        
+        
+        let width = UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height / 2
+        view.addSubview(addView)
+        view.addConstraintsWithFormat(format: "H:|[v0(\(width))]|", views: addView)
+        view.addConstraintsWithFormat(format: "V:|[v0(\(height))]|", views: addView)
+        self.addView.transform = CGAffineTransform(translationX: 0, y: height)
+
 
 
  

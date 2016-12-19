@@ -55,7 +55,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let view = UIView(frame: UIScreen.main.bounds)
         view.backgroundColor = UIColor.white
         view.alpha = 0.97
-        
         return view
     }()
     
@@ -88,6 +87,16 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         textField.font = UIFont.boldSystemFont(ofSize: 15)
         textField.textColor = UIColor.gray
         return textField
+    }()
+    
+    lazy var cancelButton: UIButton = {
+        let button = UIButton()
+        let image = UIImage(named: "cancel")
+        let tintedImage = image?.withRenderingMode(.alwaysTemplate)
+        button.setImage(tintedImage, for: .normal)
+        button.tintColor = UIColor.FinnMaroon()
+        button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
+        return button
     }()
     
     var player: AVAudioPlayer?
@@ -328,15 +337,22 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         micView.addSubview(micTextView)
         micView.addSubview(finnFace)
         micView.addSubview(finnHelpText)
+        micView.addSubview(cancelButton)
         micView.addConstraintsWithFormat(format: "H:|-10-[v0(60)]-8-[v1]", views: finnFace,finnHelpText)
         
         let verticalGap = UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height)! + 10
         micView.addConstraintsWithFormat(format: "V:|-\(verticalGap)-[v0(60)]", views: finnFace)
         micView.addConstraintsWithFormat(format: "V:|-\(verticalGap + 20)-[v0]", views: finnHelpText)
         
+        let tabBarHeight = CustomTabBarController().tabBar.frame.height + 10
+        micView.addConstraintsWithFormat(format: "H:[v0(50)]", views: cancelButton)
+        micView.addConstraintsWithFormat(format: "V:[v0(50)]-\(tabBarHeight)-|", views: cancelButton)
+        micView.addConstraint(NSLayoutConstraint(item: cancelButton, attribute: .centerX, relatedBy: .equal, toItem: cancelButton.superview, attribute: .centerX, multiplier: 1, constant: 0))
+        
+    
 
-        //micView.addConstraintsWithFormat(format: "H:|-8-[v0]", views: micTextView)
-        //micView.addConstraintsWithFormat(format: "V:[v0]|", views: micTextView)
+
+
 
 
 
@@ -519,6 +535,7 @@ class ChatLogMessageCell: BaseCell {
         textView.text = "Sample Message"
         textView.backgroundColor = UIColor.clear
         textView.isEditable = false
+        textView.isSelectable = false 
         return textView
     }()
     
