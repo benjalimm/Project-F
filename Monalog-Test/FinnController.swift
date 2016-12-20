@@ -36,11 +36,12 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return button
     }()
     
-    let micButton: UIButton = {
+    lazy var micButton: UIButton = {
         let button = UIButton(type: .custom)
         button.setImage(UIImage(named: "mic_button"), for: .normal)
         button.tintColor = UIColor.FinnMaroon()
         button.setTitle("", for: .normal)
+        button.addTarget(self, action: #selector(recordButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -48,6 +49,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let button = UIButton()
         return button
     }()
+    
     
     //Speech pop-up//
     
@@ -294,6 +296,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             speechViewFadeIn()
             try! startRecording()
             micButton.setTitle("Stop Recording", for: [])
+            navBarMovesDown()
         }
     }
     
@@ -307,9 +310,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             print (err)
         }
         
-        
-        
-        
+        navigationController?.hidesBarsOnSwipe = true 
         setupData()
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Simulate", style: .plain, target: self, action: #selector(simulate))
@@ -406,11 +407,15 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     private func setupInputComponents() {
         
         messageInputContainerView.addSubview(inputTextField)
-        messageInputContainerView.addSubview(sendButton)
+        //messageInputContainerView.addSubview(sendButton)
+        messageInputContainerView.addSubview(micButton)
+
         
-        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, sendButton)
+        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, micButton)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: inputTextField)
-        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
+        //messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
+        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: micButton)
+
 
     }
     

@@ -23,12 +23,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window?.rootViewController = CustomTabBarController()
     
-        UINavigationBar.appearance().barTintColor = UIColor(red: 207/255, green: 238/255, blue: 212/255, alpha: 0.5)
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor(red: 148/255, green: 67/255, blue: 67/255, alpha: 1)]
+        UINavigationBar.appearance().barTintColor = UIColor.FinnGreen()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.FinnMaroon()]
         
         UITabBar.appearance().tintColor = UIColor(red: 207/255, green: 238/255, blue: 212/255, alpha: 1)
         UITabBar.appearance().barTintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
         application.statusBarStyle = .default
+        
         
         return true
     }

@@ -15,6 +15,8 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     var posts:[Post]?
     
+    var addViewIsUp: Bool = false //checks for addView
+    
     let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumInteritemSpacing = 0
@@ -22,7 +24,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return layout
     }()
     
-    let addButton: UIButton = {
+    lazy var addButton: UIButton = {
         let button = UIButton(type: .custom)
         button.contentMode = .scaleAspectFill
         button.layer.cornerRadius = 20
@@ -35,14 +37,17 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         button.layer.shadowOffset = CGSize(width: 3, height: 1)
         button.layer.shadowOpacity = 1
         button.layer.shadowRadius = 0
+        button.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         return button
     }()
     
     let addView: UIView = {
         let view = UIView()
-        view.frame = CGRect(x: 100, y: 0, width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height / 2)
-                view.backgroundColor = UIColor.lightGray
+        view.frame = CGRect(x: 100, y: 0, width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height / 4)
+        view.backgroundColor = UIColor.lightGray
         view.alpha = 0.97
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
         return view
     }()
 
@@ -71,12 +76,14 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addConstraintsWithFormat(format: "V:[v0]-10-|", views: addButton)
         
         
-        let width = UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height / 2
+        let width = UIScreen.main.bounds.width - 40
+        let height = UIScreen.main.bounds.height / 4
         view.addSubview(addView)
-        view.addConstraintsWithFormat(format: "H:|[v0(\(width))]|", views: addView)
+        view.addConstraintsWithFormat(format: "H:[v0(\(width))]", views: addView)
         view.addConstraintsWithFormat(format: "V:|[v0(\(height))]|", views: addView)
-        self.addView.transform = CGAffineTransform(translationX: 0, y: height)
+        view.addConstraint(NSLayoutConstraint(item: addView, attribute: .centerX, relatedBy: .equal, toItem: addView.superview, attribute: .centerX, multiplier: 1, constant: 0))
+        self.addView.transform = CGAffineTransform(translationX: 0, y: -height)
+
 
 
 

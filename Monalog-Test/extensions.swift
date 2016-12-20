@@ -102,4 +102,58 @@ extension FinnController {
         
     }
     
+    func navBarMovesDown() {
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            
+            self.navigationController?.isNavigationBarHidden = false
+            
+            }, completion: nil)
+        
+    }
+    
+    
+}
+
+extension FeedController {
+    
+    func addViewFadeIn() {
+        let height = UIScreen.main.bounds.height / 4
+
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            
+            self.addView.transform = CGAffineTransform(translationX: 0, y: height)
+            
+            }, completion: nil)
+    }
+    
+    func addViewFadeOut() {
+        let height = UIScreen.main.bounds.height / 2
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            
+            
+            self.addView.transform = CGAffineTransform(translationX: 0, y: -height)
+            
+            
+            }, completion: nil)
+    }
+    
+    func addButtonPressed() {
+        
+        if addViewIsUp == false {
+            addViewFadeIn()
+            addViewIsUp = true
+        } else {
+            addViewFadeOut()
+            addViewIsUp = false 
+        }
+        
+    }
+    
+    
+    
+    
 }
