@@ -24,9 +24,11 @@
 		797EEFC01DFD1EDB005D2743 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFBE1DFD1EDA005D2743 /* Message+CoreDataProperties.swift */; };
 		797EEFC41DFD1FAD005D2743 /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFC21DFD1FAD005D2743 /* Post+CoreDataClass.swift */; };
 		797EEFC61DFD22FE005D2743 /* FinnControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFC51DFD22FE005D2743 /* FinnControllerHelper.swift */; };
+		933CCBE4BF5B7C6048CE7092 /* libPods-Monalog-Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EB33D9C5E9056E3779FCEE /* libPods-Monalog-Test.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6D983394FF3E799DCBC65833 /* Pods-Monalog-Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Monalog-Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Monalog-Test/Pods-Monalog-Test.debug.xcconfig"; sourceTree = "<group>"; };
 		7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnControllerSpeech.swift; sourceTree = "<group>"; };
 		790068471E02AF1C00DBC6F3 /* pop-drip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pop-drip.wav"; sourceTree = "<group>"; };
 		793FC70F1DFE5F4B0033747C /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
@@ -46,6 +48,8 @@
 		797EEFBE1DFD1EDA005D2743 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		797EEFC21DFD1FAD005D2743 /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
 		797EEFC51DFD22FE005D2743 /* FinnControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnControllerHelper.swift; sourceTree = "<group>"; };
+		C5564B832DF7B4610C7D219B /* Pods-Monalog-Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Monalog-Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-Monalog-Test/Pods-Monalog-Test.release.xcconfig"; sourceTree = "<group>"; };
+		F8EB33D9C5E9056E3779FCEE /* libPods-Monalog-Test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Monalog-Test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,12 +57,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				933CCBE4BF5B7C6048CE7092 /* libPods-Monalog-Test.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		33350599F257C37BAC946A4E /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				F8EB33D9C5E9056E3779FCEE /* libPods-Monalog-Test.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		790068441E02491A00DBC6F3 /* Supporting files */ = {
 			isa = PBXGroup;
 			children = (
@@ -77,6 +90,8 @@
 				797EEFB61DFBE559005D2743 /* Post+CoreDataProperties.swift */,
 				797EEF991DFA774B005D2743 /* Monalog-Test */,
 				797EEF981DFA774B005D2743 /* Products */,
+				ECA3BB2D330BFAD088FB8F7E /* Pods */,
+				33350599F257C37BAC946A4E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -109,6 +124,15 @@
 			path = "Monalog-Test";
 			sourceTree = "<group>";
 		};
+		ECA3BB2D330BFAD088FB8F7E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6D983394FF3E799DCBC65833 /* Pods-Monalog-Test.debug.xcconfig */,
+				C5564B832DF7B4610C7D219B /* Pods-Monalog-Test.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -116,9 +140,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 797EEFAC1DFA774B005D2743 /* Build configuration list for PBXNativeTarget "Monalog-Test" */;
 			buildPhases = (
+				26D887922B866C5991E696D8 /* [CP] Check Pods Manifest.lock */,
 				797EEF931DFA774B005D2743 /* Sources */,
 				797EEF941DFA774B005D2743 /* Frameworks */,
 				797EEF951DFA774B005D2743 /* Resources */,
+				97CFF353DFCA5F02D93FA0E9 /* [CP] Embed Pods Frameworks */,
+				BA039A2597D2544B3A1236A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -177,6 +204,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		26D887922B866C5991E696D8 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		97CFF353DFCA5F02D93FA0E9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Monalog-Test/Pods-Monalog-Test-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BA039A2597D2544B3A1236A0 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Monalog-Test/Pods-Monalog-Test-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		797EEF931DFA774B005D2743 /* Sources */ = {
@@ -314,6 +389,7 @@
 		};
 		797EEFAD1DFA774B005D2743 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6D983394FF3E799DCBC65833 /* Pods-Monalog-Test.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = M3P85P7J6X;
@@ -327,6 +403,7 @@
 		};
 		797EEFAE1DFA774B005D2743 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C5564B832DF7B4610C7D219B /* Pods-Monalog-Test.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = M3P85P7J6X;

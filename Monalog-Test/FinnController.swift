@@ -19,12 +19,14 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     let messageInputContainerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
+        view.alpha = 0.9
         return view
     }()
     
-    var inputTextField: UITextField = {
+    lazy var inputTextField: UITextField = {
         let textField = UITextField()
         textField.placeholder = "How much have you spent today?.."
+        textField.font = UIFont.systemFont(ofSize: 14)
         return textField
     }()
     
@@ -45,10 +47,11 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return button
     }()
     
-    var micOrSendButton: UIButton = {
+    lazy var micOrSendButton: UIButton = {
         let button = UIButton()
         return button
     }()
+    
     
     
     //Speech pop-up//
@@ -205,7 +208,8 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let frc = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
         return frc as! NSFetchedResultsController<Message>
     }()
-    //MARK: Speech recogniser instatiations
+    
+    //MARK: Speech recogniser -- STARTING POINT OF SPEECH RECOGNITION CODE
     
     private let speechRecognizer = SFSpeechRecognizer()!
     
@@ -219,7 +223,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
     }
     
-    // MARK: START RECORDING
+    // START RECORDING
     func startRecording() throws {
    
         // cancel previous tasks if they are running
@@ -300,6 +304,15 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         }
     }
     
+    // MARK: -- ENDING POINT OF SPEECH RECOGNITION CODE
+    
+    func checkFields() {
+        guard let textField = self.inputTextField.text, !textField.isEmpty else {
+            return
+        }
+        self.micOrSendButton = self.sendButton
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -313,11 +326,10 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.hidesBarsOnSwipe = true 
         setupData()
         
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Simulate", style: .plain, target: self, action: #selector(simulate))
+        micOrSendButton = micButton
+        self.inputTextField.addTarget(self, action: #selector(checkFields), for: .editingChanged)
         
         micButton.isEnabled = false
-        let micImage = UIImage(named: "mic_button")
-        navigationItem.rightBarButtonItem = UIBarButtonItem(image: micImage, landscapeImagePhone: micImage, style: .plain, target: self, action: #selector(recordButtonTapped))
         
         
         collectionView?.backgroundColor = UIColor.white
@@ -329,34 +341,25 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: messageInputContainerView)
         view.addConstraintsWithFormat(format: "V:[v0(48)]", views: messageInputContainerView)
         
+        
+        // SETTING UP OF MIC-VIEW
         view.addSubview(micView)
-
-        //micView.alpha = 0
         let bottom = UIScreen.main.bounds.height
         micView.transform = CGAffineTransform(translationX: 0 , y: bottom)
-
         micView.addSubview(micTextView)
         micView.addSubview(finnFace)
         micView.addSubview(finnHelpText)
         micView.addSubview(cancelButton)
         micView.addConstraintsWithFormat(format: "H:|-10-[v0(60)]-8-[v1]", views: finnFace,finnHelpText)
-        
         let verticalGap = UIApplication.shared.statusBarFrame.height + (navigationController?.navigationBar.frame.height)! + 10
         micView.addConstraintsWithFormat(format: "V:|-\(verticalGap)-[v0(60)]", views: finnFace)
         micView.addConstraintsWithFormat(format: "V:|-\(verticalGap + 20)-[v0]", views: finnHelpText)
-        
         let tabBarHeight = CustomTabBarController().tabBar.frame.height + 10
         micView.addConstraintsWithFormat(format: "H:[v0(50)]", views: cancelButton)
         micView.addConstraintsWithFormat(format: "V:[v0(50)]-\(tabBarHeight)-|", views: cancelButton)
         micView.addConstraint(NSLayoutConstraint(item: cancelButton, attribute: .centerX, relatedBy: .equal, toItem: cancelButton.superview, attribute: .centerX, multiplier: 1, constant: 0))
+        // -- //
         
-    
-
-
-
-
-
-
         bottomConstraint = NSLayoutConstraint(item: messageInputContainerView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
         view.addConstraint(bottomConstraint!)
         
@@ -408,13 +411,13 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         messageInputContainerView.addSubview(inputTextField)
         //messageInputContainerView.addSubview(sendButton)
-        messageInputContainerView.addSubview(micButton)
+        messageInputContainerView.addSubview(micOrSendButton)
 
         
-        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, micButton)
+        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, micOrSendButton)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: inputTextField)
         //messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
-        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: micButton)
+        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: micOrSendButton)
 
 
     }
