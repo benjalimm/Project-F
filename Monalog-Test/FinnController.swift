@@ -119,6 +119,8 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             return
         } else {
         let message = FinnController.createMessageWithText(text: inputTextField.text!, minutesAgo: 0, context: context, isSender: true)
+        sendTextToApiAI(textRequest: inputTextField.text!)
+
         
         do {
             try context.save()
@@ -151,8 +153,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             
             
             let message = FinnController.createMessageWithText(text: micTextView.text!, minutesAgo: 0, context: context, isSender: true)
-            
-            sendTextToApiAI(textRequest: micTextView.text!)
+            sendTextToApiAI(textRequest: micTextView.text)
             
             do {
                 try context.save()
@@ -165,6 +166,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 collectionView?.insertItems(at: [insertionIndexPath])
                 collectionView?.scrollToItem(at: insertionIndexPath, at: .top, animated: true)
                 micTextView.text = nil
+                
             } catch let err {
                 print (err)
             }
@@ -176,13 +178,12 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     var bottomConstraint: NSLayoutConstraint?
     
-    func simulate() {
+    func simulate(text: String) {
         print("simulate")
         
         let delegate = UIApplication.shared.delegate as! AppDelegate
         let context = delegate.persistentContainer.viewContext
-        let message = FinnController.createMessageWithText(text: "Here's a text message that was sent a few minutes ago", minutesAgo: 0, context: context)
-        
+        let message = FinnController.createMessageWithText(text: text, minutesAgo: 0, context: context)
         do {
             try context.save()
             
