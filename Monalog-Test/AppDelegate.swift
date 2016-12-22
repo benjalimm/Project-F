@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    
     var window: UIWindow?
     
 
@@ -30,7 +30,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barTintColor = UIColor(red: 0/255, green: 0/255, blue: 0/255, alpha: 0.7)
         application.statusBarStyle = .default
         
+        //ApiAI
         
+        let apiai = ApiAI.shared()
+        
+        let configuration: AIConfiguration = AIDefaultConfiguration()
+        
+        configuration.clientAccessToken = "8c68b41e3f614afbab2f253b432506c9"
+        
+        apiai?.configuration = configuration
+        print ("api ai unwrapped")
         return true
     }
 

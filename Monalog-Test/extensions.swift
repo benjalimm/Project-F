@@ -114,6 +114,46 @@ extension FinnController {
     }
     
     
+    func sendTextToApiAI(textRequest: String?) {
+        
+        let request = ApiAI.shared().textRequest()
+        
+        if let text = textRequest {
+            request?.query = [text]
+            print ("\(text) inserted into text query")
+        } else {
+            request?.query = [""]
+        }
+        
+        request?.setMappedCompletionBlockSuccess({ (request, response) in
+            print ("in completion")
+
+            let response = response as! AIResponse
+            
+            if response.result.action == "logExpense" {
+                if let parameters = response.result.parameters {
+                    
+                    let items = parameters["amount"] as! [String]
+                    
+                    let costs = parameters["unit-currency"] as! [Int]
+                    
+                    for i in items {
+                        print("\(i)")
+                    }
+                    
+                }
+            }
+            
+            }, failure: { (request, error) in
+                
+                print("Error sending")
+        });
+        
+        ApiAI.shared().enqueue(request)
+        
+    }
+    
+    
 }
 
 extension FeedController {
@@ -152,7 +192,6 @@ extension FeedController {
         }
         
     }
-    
     
     
     

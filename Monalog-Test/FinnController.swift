@@ -152,6 +152,8 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
             
             let message = FinnController.createMessageWithText(text: micTextView.text!, minutesAgo: 0, context: context, isSender: true)
             
+            sendTextToApiAI(textRequest: micTextView.text!)
+            
             do {
                 try context.save()
                 
