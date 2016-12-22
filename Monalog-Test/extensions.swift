@@ -149,6 +149,12 @@ extension FinnController {
                     }
                 }
                 
+            } else if response.result.action == "input.welcome" {
+                let text = "Hey there buddy, I'm Finn. Your personal Financial Assistant. You can tell me to log expenses for you (e.g I spent $40 on food, $80 on petrol and $3 on coffee)."
+                self.simulate(text: text)
+            } else {
+                let text = "I'm not entirely sure what you're saying dude.."
+                self.simulate(text: text)
                 }
             }
             print("Left Response block")
