@@ -137,12 +137,18 @@ extension FinnController {
                     if let items = parameters["item"]?.stringValue{
                         print ("THERE IS SOMETHING IN ITEM SET")
                         print("\(items)")
+                        let delegate = UIApplication.shared.delegate as? AppDelegate
+                        let context = delegate?.persistentContainer.viewContext
+                        FinnController.createMessageWithText(text: items, minutesAgo: 0, context: context!)
 
                     }
                     
                     if let costs = parameters["unit-currency"]?.stringValue {
                         print("THERE IS SOMETHING IN COST SET")
                         print("\(costs)")
+                        let delegate = UIApplication.shared.delegate as? AppDelegate
+                        let context = delegate?.persistentContainer.viewContext
+                        FinnController.createMessageWithText(text: costs, minutesAgo: 0, context: context!)
 
                     }
                 }
