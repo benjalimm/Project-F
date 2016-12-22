@@ -128,21 +128,28 @@ extension FinnController {
         request?.setMappedCompletionBlockSuccess({ (request, response) in
             print ("in completion")
 
-            let response = response as! AIResponse
-            
+            if let response = response as? AIResponse {
+                print("AI RESPONSE UNWRAPPED")
+
             if response.result.action == "logExpense" {
-                if let parameters = response.result.parameters {
+                if let parameters = response.result.parameters as? [String: AIResponseParameter] {
                     
-                    let items = parameters["amount"] as! [String]
-                    
-                    let costs = parameters["unit-currency"] as! [Int]
-                    
-                    for i in items {
-                        print("\(i)")
+                    if let items = parameters["item"]?.stringValue{
+                        print ("THERE IS SOMETHING IN ITEM SET")
+                        print("\(items)")
+
                     }
                     
+                    if let costs = parameters["unit-currency"]?.stringValue {
+                        print("THERE IS SOMETHING IN COST SET")
+                        print("\(costs)")
+
+                    }
+                }
+                
                 }
             }
+            print("Left Response block")
             
             }, failure: { (request, error) in
                 
