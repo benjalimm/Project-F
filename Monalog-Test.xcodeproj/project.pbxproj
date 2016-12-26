@@ -10,6 +10,13 @@
 		790068401E014A4700DBC6F3 /* FinnControllerSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */; };
 		790068481E02AF1C00DBC6F3 /* pop-drip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 790068471E02AF1C00DBC6F3 /* pop-drip.wav */; };
 		793FC7101DFE5F4B0033747C /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC70F1DFE5F4B0033747C /* extensions.swift */; };
+		7955645E1E0C1E7500E1B23F /* Decoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795564561E0C1E7500E1B23F /* Decoder.swift */; };
+		7955645F1E0C1E7500E1B23F /* Encoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795564571E0C1E7500E1B23F /* Encoder.swift */; };
+		795564601E0C1E7500E1B23F /* ExtensionArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795564581E0C1E7500E1B23F /* ExtensionArray.swift */; };
+		795564611E0C1E7500E1B23F /* ExtensionDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 795564591E0C1E7500E1B23F /* ExtensionDictionary.swift */; };
+		795564621E0C1E7500E1B23F /* Gloss.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955645B1E0C1E7500E1B23F /* Gloss.swift */; };
+		795564631E0C1E7500E1B23F /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 7955645C1E0C1E7500E1B23F /* Info.plist */; };
+		795564641E0C1E7500E1B23F /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7955645D1E0C1E7500E1B23F /* Operators.swift */; };
 		797EEF9B1DFA774B005D2743 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEF9A1DFA774B005D2743 /* AppDelegate.swift */; };
 		797EEF9D1DFA774B005D2743 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEF9C1DFA774B005D2743 /* ViewController.swift */; };
 		797EEFA01DFA774B005D2743 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 797EEF9E1DFA774B005D2743 /* Main.storyboard */; };
@@ -24,6 +31,7 @@
 		797EEFC01DFD1EDB005D2743 /* Message+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFBE1DFD1EDA005D2743 /* Message+CoreDataProperties.swift */; };
 		797EEFC41DFD1FAD005D2743 /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFC21DFD1FAD005D2743 /* Post+CoreDataClass.swift */; };
 		797EEFC61DFD22FE005D2743 /* FinnControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFC51DFD22FE005D2743 /* FinnControllerHelper.swift */; };
+		79E03DB51E10CA7E00E4AA61 /* FinnBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E03DB41E10CA7E00E4AA61 /* FinnBot.swift */; };
 		933CCBE4BF5B7C6048CE7092 /* libPods-Monalog-Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EB33D9C5E9056E3779FCEE /* libPods-Monalog-Test.a */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +41,14 @@
 		790068471E02AF1C00DBC6F3 /* pop-drip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pop-drip.wav"; sourceTree = "<group>"; };
 		793FC70F1DFE5F4B0033747C /* extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = extensions.swift; sourceTree = "<group>"; };
 		795564511E0B87D500E1B23F /* Monalog-Test-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Monalog-Test-Bridging-Header.h"; sourceTree = "<group>"; };
+		795564561E0C1E7500E1B23F /* Decoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Decoder.swift; sourceTree = "<group>"; };
+		795564571E0C1E7500E1B23F /* Encoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Encoder.swift; sourceTree = "<group>"; };
+		795564581E0C1E7500E1B23F /* ExtensionArray.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionArray.swift; sourceTree = "<group>"; };
+		795564591E0C1E7500E1B23F /* ExtensionDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionDictionary.swift; sourceTree = "<group>"; };
+		7955645A1E0C1E7500E1B23F /* Gloss.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gloss.h; sourceTree = "<group>"; };
+		7955645B1E0C1E7500E1B23F /* Gloss.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gloss.swift; sourceTree = "<group>"; };
+		7955645C1E0C1E7500E1B23F /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7955645D1E0C1E7500E1B23F /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		797EEF971DFA774B005D2743 /* Monalog-Test.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Monalog-Test.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		797EEF9A1DFA774B005D2743 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		797EEF9C1DFA774B005D2743 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -49,6 +65,7 @@
 		797EEFBE1DFD1EDA005D2743 /* Message+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Message+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		797EEFC21DFD1FAD005D2743 /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
 		797EEFC51DFD22FE005D2743 /* FinnControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnControllerHelper.swift; sourceTree = "<group>"; };
+		79E03DB41E10CA7E00E4AA61 /* FinnBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnBot.swift; sourceTree = "<group>"; };
 		C5564B832DF7B4610C7D219B /* Pods-Monalog-Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Monalog-Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-Monalog-Test/Pods-Monalog-Test.release.xcconfig"; sourceTree = "<group>"; };
 		F8EB33D9C5E9056E3779FCEE /* libPods-Monalog-Test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Monalog-Test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -82,6 +99,22 @@
 			path = ..;
 			sourceTree = "<group>";
 		};
+		795564551E0C1E7500E1B23F /* Gloss */ = {
+			isa = PBXGroup;
+			children = (
+				795564561E0C1E7500E1B23F /* Decoder.swift */,
+				795564571E0C1E7500E1B23F /* Encoder.swift */,
+				795564581E0C1E7500E1B23F /* ExtensionArray.swift */,
+				795564591E0C1E7500E1B23F /* ExtensionDictionary.swift */,
+				7955645A1E0C1E7500E1B23F /* Gloss.h */,
+				7955645B1E0C1E7500E1B23F /* Gloss.swift */,
+				7955645C1E0C1E7500E1B23F /* Info.plist */,
+				7955645D1E0C1E7500E1B23F /* Operators.swift */,
+			);
+			name = Gloss;
+			path = Sources;
+			sourceTree = "<group>";
+		};
 		797EEF8E1DFA774B005D2743 = {
 			isa = PBXGroup;
 			children = (
@@ -110,6 +143,7 @@
 				790068441E02491A00DBC6F3 /* Supporting files */,
 				797EEF9A1DFA774B005D2743 /* AppDelegate.swift */,
 				797EEF9C1DFA774B005D2743 /* ViewController.swift */,
+				793FC70F1DFE5F4B0033747C /* extensions.swift */,
 				797EEFB31DFBE2C2005D2743 /* FeedControllerHelper.swift */,
 				797EEF9E1DFA774B005D2743 /* Main.storyboard */,
 				797EEFA41DFA774B005D2743 /* Assets.xcassets */,
@@ -119,9 +153,10 @@
 				797EEFAF1DFA7902005D2743 /* CustomTabBarController.swift */,
 				797EEFB11DFB0204005D2743 /* FinnController.swift */,
 				797EEFC51DFD22FE005D2743 /* FinnControllerHelper.swift */,
-				793FC70F1DFE5F4B0033747C /* extensions.swift */,
 				7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */,
+				79E03DB41E10CA7E00E4AA61 /* FinnBot.swift */,
 				795564511E0B87D500E1B23F /* Monalog-Test-Bridging-Header.h */,
+				795564551E0C1E7500E1B23F /* Gloss */,
 			);
 			path = "Monalog-Test";
 			sourceTree = "<group>";
@@ -202,6 +237,7 @@
 				797EEFA81DFA774B005D2743 /* LaunchScreen.storyboard in Resources */,
 				797EEFA51DFA774B005D2743 /* Assets.xcassets in Resources */,
 				797EEFA01DFA774B005D2743 /* Main.storyboard in Resources */,
+				795564631E0C1E7500E1B23F /* Info.plist in Resources */,
 				790068481E02AF1C00DBC6F3 /* pop-drip.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -263,13 +299,20 @@
 			files = (
 				790068401E014A4700DBC6F3 /* FinnControllerSpeech.swift in Sources */,
 				797EEFB21DFB0204005D2743 /* FinnController.swift in Sources */,
+				7955645F1E0C1E7500E1B23F /* Encoder.swift in Sources */,
 				797EEFC41DFD1FAD005D2743 /* Post+CoreDataClass.swift in Sources */,
+				79E03DB51E10CA7E00E4AA61 /* FinnBot.swift in Sources */,
 				797EEFBA1DFBE559005D2743 /* Post+CoreDataProperties.swift in Sources */,
+				7955645E1E0C1E7500E1B23F /* Decoder.swift in Sources */,
+				795564641E0C1E7500E1B23F /* Operators.swift in Sources */,
 				797EEFC01DFD1EDB005D2743 /* Message+CoreDataProperties.swift in Sources */,
+				795564611E0C1E7500E1B23F /* ExtensionDictionary.swift in Sources */,
 				797EEF9D1DFA774B005D2743 /* ViewController.swift in Sources */,
 				797EEFA31DFA774B005D2743 /* Monalog_Test.xcdatamodeld in Sources */,
 				797EEFB41DFBE2C3005D2743 /* FeedControllerHelper.swift in Sources */,
 				797EEFB01DFA7902005D2743 /* CustomTabBarController.swift in Sources */,
+				795564621E0C1E7500E1B23F /* Gloss.swift in Sources */,
+				795564601E0C1E7500E1B23F /* ExtensionArray.swift in Sources */,
 				797EEFC61DFD22FE005D2743 /* FinnControllerHelper.swift in Sources */,
 				797EEFBF1DFD1EDB005D2743 /* Message+CoreDataClass.swift in Sources */,
 				797EEF9B1DFA774B005D2743 /* AppDelegate.swift in Sources */,

@@ -114,61 +114,6 @@ extension FinnController {
     }
     
     
-    func sendTextToApiAI(textRequest: String?) {
-        
-        let request = ApiAI.shared().textRequest()
-        
-        if let text = textRequest {
-            request?.query = [text]
-            print ("\(text) inserted into text query")
-        } else {
-            request?.query = [""]
-        }
-        
-        request?.setMappedCompletionBlockSuccess({ (request, response) in
-            print ("in completion")
-
-            if let response = response as? AIResponse {
-                print("AI RESPONSE UNWRAPPED")
-
-            if response.result.action == "logExpense" {
-                if let parameters = response.result.parameters as? [String: AIResponseParameter] {
-                    
-                    if let items = parameters["item"]?.stringValue{
-                        print ("THERE IS SOMETHING IN ITEM SET")
-                        print("\(items)")
-                        self.simulate(text: items)
-
-                    }
-                    
-                    if let costs = parameters["unit-currency"]?.stringValue {
-                        print("THERE IS SOMETHING IN COST SET")
-                        print("\(costs)")
-                        self.simulate(text: costs)
-
-                    }
-                }
-                
-            } else if response.result.action == "input.welcome" {
-                let text = "Hey there buddy, I'm Finn. Your personal Financial Assistant. You can tell me to log expenses for you (e.g I spent $40 on food, $80 on petrol and $3 on coffee)."
-                self.simulate(text: text)
-            } else {
-                let text = "I'm not entirely sure what you're saying dude.."
-                self.simulate(text: text)
-                }
-            }
-            print("Left Response block")
-            
-            }, failure: { (request, error) in
-                
-                print("Error sending")
-        });
-        
-        ApiAI.shared().enqueue(request)
-        
-    }
-    
-    
 }
 
 extension FeedController {
@@ -208,6 +153,39 @@ extension FeedController {
         
     }
     
+    func addButtonMoveUp() {
+        
+        
+        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+            let width = UIScreen.main.bounds.width
+            let height = UIScreen.main.bounds.height
+            
+            self.circleView.transform = CGAffineTransform(translationX: width - 100, y: height - 100)
+            
+            }, completion: nil)
+    }
+    
+    func addButtonMoveDown(gesture: UIGestureRecognizer) {
+        
+        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
+            switch swipeGesture.direction {
+            case UISwipeGestureRecognizerDirection.up:
+                
+                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
+                    
+                    
+                    let width = UIScreen.main.bounds.width
+                    let height = UIScreen.main.bounds.height
+                    
+                    self.circleView.transform = CGAffineTransform(translationX: width, y: height)
+                    
+                    
+                    }, completion: nil)
+            default:
+                break
+            }
+            }
     
     
+}
 }

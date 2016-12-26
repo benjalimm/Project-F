@@ -21,9 +21,9 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Enables uer to record expenses through Speech Recognition</string>
+	<string>Enables user to interact with Finn through Speech Recognition</string>
 	<key>NSSpeechRecognitionUsageDescription</key>
-	<string>Enables user to record expenses through Speech recognition</string>
+	<string>Enables user to interact with Finn through Speech Recognition</string>
 	<key>UILaunchStoryboardName</key>
 	<string>Launch Screen</string>
 	<key>UIMainStoryboardFile</key>

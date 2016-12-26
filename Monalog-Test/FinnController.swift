@@ -318,6 +318,8 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "Finn"
+        
         
         do {
             try fetchedResultsController.performFetch()
@@ -337,6 +339,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.alwaysBounceVertical = true
+        collectionView?.showsVerticalScrollIndicator = false
         collectionView?.register(ChatLogMessageCell.self, forCellWithReuseIdentifier: cellId)
         
         
@@ -459,7 +462,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
                 
                 cell.profileImageView.isHidden = false
                 
-                //cell.textBubbleView.backgroundColor = UIColor(white: 0.95, alpha: 1)
                 cell.bubbleImageView.image = ChatLogMessageCell.grayBubbleImage
                 cell.bubbleImageView.tintColor = UIColor(white: 0.95, alpha: 1)
                 cell.messageTextView.textColor = UIColor.black
@@ -552,7 +554,6 @@ class ChatLogMessageCell: BaseCell {
     
     let textBubbleView: UIView = {
         let view = UIView()
-        //view.backgroundColor = UIColor(white: 0.95, alpha: 1)
         view.layer.cornerRadius = 15
         view.layer.masksToBounds = true
         return view

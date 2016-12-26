@@ -15,7 +15,7 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     var posts:[Post]?
     
-    var addViewIsUp: Bool = false //checks for addView
+    var addViewIsUp: Bool = false 
     
     let collectionViewFlowLayout: UICollectionViewFlowLayout = {
         let layout = UICollectionViewFlowLayout()
@@ -27,18 +27,19 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
     lazy var addButton: UIButton = {
         let button = UIButton(type: .custom)
         button.contentMode = .scaleAspectFill
-        button.layer.cornerRadius = 20
-        button.layer.masksToBounds = true
-        button.setImage(UIImage(named: "addButton"), for: .normal)
-        button.tintColor = UIColor.black
-        button.backgroundColor = UIColor.FinnGreen()
-        button.setTitle("", for: .normal)
-        button.layer.shadowColor = UIColor.gray.cgColor
-        button.layer.shadowOffset = CGSize(width: 3, height: 1)
-        button.layer.shadowOpacity = 1
-        button.layer.shadowRadius = 0
+        button.backgroundColor = UIColor.clear
+        button.setTitle("+", for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 50)
+        button.titleLabel?.tintColor = UIColor.black
         button.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         return button
+    }()
+    
+    let circleView: UIView = {
+        let view = UIView()
+        view.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
+        view.backgroundColor = UIColor.FinnGreen()
+        return view
     }()
     
     let addView: UIView = {
@@ -50,14 +51,17 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.layer.masksToBounds = true
         return view
     }()
-
     
+   
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupData()
 
         navigationItem.title = "FINN"
+        
+        navigationController?.hidesBarsOnSwipe = true
         
         collectionView?.alwaysBounceVertical = true
         
@@ -70,24 +74,20 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.dataSource = self
         
         collectionView?.delegate = self
+
         
-        view.addSubview(addButton)
-        view.addConstraintsWithFormat(format: "H:[v0]-20-|", views: addButton)
-        view.addConstraintsWithFormat(format: "V:[v0]-10-|", views: addButton)
-        
-        
-        let width = UIScreen.main.bounds.width - 40
-        let height = UIScreen.main.bounds.height / 4
+        let width = UIScreen.main.bounds.width
+        let height = UIScreen.main.bounds.height
         view.addSubview(addView)
-        view.addConstraintsWithFormat(format: "H:[v0(\(width))]", views: addView)
-        view.addConstraintsWithFormat(format: "V:|[v0(\(height))]|", views: addView)
+        view.addConstraintsWithFormat(format: "H:[v0(\(width - 40))]", views: addView)
+        view.addConstraintsWithFormat(format: "V:|[v0(\(height / 4))]|", views: addView)
         view.addConstraint(NSLayoutConstraint(item: addView, attribute: .centerX, relatedBy: .equal, toItem: addView.superview, attribute: .centerX, multiplier: 1, constant: 0))
         self.addView.transform = CGAffineTransform(translationX: 0, y: -height)
-
-
-
-
- 
+        
+        view.addSubview(addButton)
+        view.addConstraintsWithFormat(format: "H:[v0]|", views: addButton)
+        view.addConstraintsWithFormat(format: "V:[v0]|", views: addButton)
+        
         
     }
     

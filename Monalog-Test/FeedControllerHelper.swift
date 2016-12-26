@@ -46,10 +46,10 @@ extension FeedController {
         
         if let context = delegate?.persistentContainer.viewContext {
             
-            createPostWithText(item: "Gas", cost: 45, minutesAgo: 1, context: context)
-            createPostWithText(item: "Books", cost: 22, minutesAgo: 2, context: context)
-            createPostWithText(item: "Shoes", cost: 657, minutesAgo: 3, context: context)
-            createPostWithText(item: "Glasses", cost: 2347, minutesAgo: 4, context: context)
+            FeedController.createPostWithText(item: "Gas", cost: 45, minutesAgo: 1, context: context)
+            FeedController.createPostWithText(item: "Books", cost: 22, minutesAgo: 2, context: context)
+            FeedController.createPostWithText(item: "Shoes", cost: 657, minutesAgo: 3, context: context)
+            FeedController.createPostWithText(item: "Glasses", cost: 2347, minutesAgo: 4, context: context)
 
 
 
@@ -67,11 +67,12 @@ extension FeedController {
         
     }
     
-    private func createPostWithText(item: String, cost: Double, minutesAgo: Double, context: NSManagedObjectContext) {
+     static func createPostWithText(item: String, cost: Double, minutesAgo: Double, context: NSManagedObjectContext) -> Post {
         let post = NSEntityDescription.insertNewObject(forEntityName: "Post", into: context) as! Post
         post.item = item
         post.cost = cost
         post.date = NSDate().addingTimeInterval(-minutesAgo * 60)
+        return post 
     }
     
     func loadData() {
@@ -87,6 +88,30 @@ extension FeedController {
             } catch let err{
                 print (err)
             }
+        }
+    }
+    
+    func insertPost(item: String, cost: Double)  {
+        
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        
+        
+        let post = FeedController.createPostWithText(item: item, cost: cost, minutesAgo: 0, context: context)
+        
+        do {
+            try context.save()
+            
+            posts?.append(post)
+            
+            let item = posts!.count - 1
+            let insertionIndexPath = IndexPath(item: item, section: 0)
+            
+            collectionView?.insertItems(at: [insertionIndexPath])
+            collectionView?.scrollToItem(at: insertionIndexPath, at: .top, animated: true)
+            
+        } catch let err {
+            print (err)
         }
     }
     

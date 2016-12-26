@@ -27,9 +27,6 @@ class CustomTabBarController: UITabBarController {
         graphsNavigationController.title = ""
         graphsNavigationController.tabBarItem.image = UIImage(named: "graphs")
         
-
-        
-        
         viewControllers = [navigationController, finnNavigationController, graphsNavigationController]
         
         tabBar.isTranslucent = false
