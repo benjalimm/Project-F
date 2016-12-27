@@ -153,39 +153,4 @@ extension FeedController {
         
     }
     
-    func addButtonMoveUp() {
-        
-        
-        UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-            let width = UIScreen.main.bounds.width
-            let height = UIScreen.main.bounds.height
-            
-            self.circleView.transform = CGAffineTransform(translationX: width - 100, y: height - 100)
-            
-            }, completion: nil)
-    }
-    
-    func addButtonMoveDown(gesture: UIGestureRecognizer) {
-        
-        if let swipeGesture = gesture as? UISwipeGestureRecognizer {
-            switch swipeGesture.direction {
-            case UISwipeGestureRecognizerDirection.up:
-                
-                UIView.animate(withDuration: 0.4, delay: 0.0, options: [], animations: {
-                    
-                    
-                    let width = UIScreen.main.bounds.width
-                    let height = UIScreen.main.bounds.height
-                    
-                    self.circleView.transform = CGAffineTransform(translationX: width, y: height)
-                    
-                    
-                    }, completion: nil)
-            default:
-                break
-            }
-            }
-    
-    
-}
 }

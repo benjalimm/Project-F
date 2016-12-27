@@ -30,18 +30,12 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         button.backgroundColor = UIColor.clear
         button.setTitle("+", for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 50)
-        button.titleLabel?.tintColor = UIColor.black
+        button.setTitleColor(UIColor.FinnMaroonBlur(), for: .normal)
         button.addTarget(self, action: #selector(addButtonPressed), for: .touchUpInside)
         return button
     }()
     
-    let circleView: UIView = {
-        let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        view.backgroundColor = UIColor.FinnGreen()
-        return view
-    }()
-    
+    // Pop-up view when manually adding transactions
     let addView: UIView = {
         let view = UIView()
         view.frame = CGRect(x: 100, y: 0, width: UIScreen.main.bounds.width / 2, height: UIScreen.main.bounds.height / 4)
@@ -51,6 +45,20 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         view.layer.masksToBounds = true
         return view
     }()
+    
+    let whatText: UILabel = {
+        let label = UILabel()
+        label.text = "What is it?"
+        return label
+    }()
+    
+    let whatTextView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        return view
+    }()
+    
+    
     
    
 
@@ -80,12 +88,20 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let height = UIScreen.main.bounds.height
         view.addSubview(addView)
         view.addConstraintsWithFormat(format: "H:[v0(\(width - 40))]", views: addView)
-        view.addConstraintsWithFormat(format: "V:|[v0(\(height / 4))]|", views: addView)
+        view.addConstraintsWithFormat(format: "V:|[v0(\(height / 3))]|", views: addView)
         view.addConstraint(NSLayoutConstraint(item: addView, attribute: .centerX, relatedBy: .equal, toItem: addView.superview, attribute: .centerX, multiplier: 1, constant: 0))
         self.addView.transform = CGAffineTransform(translationX: 0, y: -height)
         
+        addView.addSubview(whatTextView)
+        addView.addSubview(whatText)
+        addView.addConstraintsWithFormat(format: "H:[v0]-5-[v1(\(width/2))]|", views: whatText, whatTextView)
+        addView.addConstraintsWithFormat(format: "V:|-20-[v0(20)]|", views: whatTextView)
+        addView.addConstraintsWithFormat(format: "V:|-20-[v0(20)]|", views: whatText)
+
+
+        
         view.addSubview(addButton)
-        view.addConstraintsWithFormat(format: "H:[v0]|", views: addButton)
+        view.addConstraintsWithFormat(format: "H:[v0]-10-|", views: addButton)
         view.addConstraintsWithFormat(format: "V:[v0]|", views: addButton)
         
         

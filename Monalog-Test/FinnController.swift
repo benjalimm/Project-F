@@ -47,12 +47,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return button
     }()
     
-    lazy var micOrSendButton: UIButton = {
-        let button = UIButton()
-        return button
-    }()
-    
-    
+    var micOrSendButton: UIButton?
     
     //Speech pop-up//
     
@@ -241,6 +236,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
         
         
+        
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
         
         guard let inputNode = audioEngine.inputNode else { fatalError("Audio Engine has no input node") }
@@ -310,10 +306,14 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     // MARK: -- ENDING POINT OF SPEECH RECOGNITION CODE
     
     func checkFields() {
-        guard let textField = self.inputTextField.text, !textField.isEmpty else {
-            return
-        }
-        self.micOrSendButton = self.sendButton
+        UIView.animate(withDuration: 0, delay: 0, options: [], animations: { 
+            if (self.inputTextField.text?.isEmpty)! {
+                self.micOrSendButton = self.micButton
+            } else {
+                self.micOrSendButton = self.sendButton
+            }
+        }, completion: nil)
+        
     }
     
     override func viewDidLoad() {
@@ -332,7 +332,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setupData()
         
         micOrSendButton = micButton
-        self.inputTextField.addTarget(self, action: #selector(checkFields), for: .editingChanged)
         
         micButton.isEnabled = false
         
@@ -376,6 +375,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(checkFields), name: NSNotification.Name.UITextFieldTextDidChange, object: inputTextField.text)
         
         let indexPath = IndexPath(item: self.messages!.count - 1, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: .top, animated: true)
@@ -402,7 +402,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
                         self.collectionView?.scrollToItem(at: indexPath as IndexPath, at: .top, animated: true)
                     }
                     
-                    
             })
             
         }
@@ -417,15 +416,15 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         messageInputContainerView.addSubview(inputTextField)
         //messageInputContainerView.addSubview(sendButton)
-        messageInputContainerView.addSubview(micOrSendButton)
+        messageInputContainerView.addSubview(micOrSendButton!)
 
         
-        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, micOrSendButton)
+        messageInputContainerView.addConstraintsWithFormat(format: "H:|-8-[v0][v1(60)]|", views: inputTextField, micOrSendButton!)
         messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: inputTextField)
         //messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: sendButton)
-        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: micOrSendButton)
-
-
+        messageInputContainerView.addConstraintsWithFormat(format: "V:|[v0]|", views: micOrSendButton!)
+    
+        
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -506,6 +505,7 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 8, left: 0, bottom: 49, right: 0)
     }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         speechRecognizer.delegate = self

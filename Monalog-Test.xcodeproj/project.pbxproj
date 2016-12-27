@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6C6B328EA730E21CA24938AF /* libPods-Monalog-Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 136657778EA3268A6B8E3938 /* libPods-Monalog-Test.a */; };
 		790068401E014A4700DBC6F3 /* FinnControllerSpeech.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */; };
 		790068481E02AF1C00DBC6F3 /* pop-drip.wav in Resources */ = {isa = PBXBuildFile; fileRef = 790068471E02AF1C00DBC6F3 /* pop-drip.wav */; };
 		793FC7101DFE5F4B0033747C /* extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 793FC70F1DFE5F4B0033747C /* extensions.swift */; };
@@ -32,10 +33,11 @@
 		797EEFC41DFD1FAD005D2743 /* Post+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFC21DFD1FAD005D2743 /* Post+CoreDataClass.swift */; };
 		797EEFC61DFD22FE005D2743 /* FinnControllerHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 797EEFC51DFD22FE005D2743 /* FinnControllerHelper.swift */; };
 		79E03DB51E10CA7E00E4AA61 /* FinnBot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E03DB41E10CA7E00E4AA61 /* FinnBot.swift */; };
-		933CCBE4BF5B7C6048CE7092 /* libPods-Monalog-Test.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F8EB33D9C5E9056E3779FCEE /* libPods-Monalog-Test.a */; };
+		79E03DB71E124A5200E4AA61 /* JSONServiceObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 79E03DB61E124A5200E4AA61 /* JSONServiceObject.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		136657778EA3268A6B8E3938 /* libPods-Monalog-Test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Monalog-Test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6D983394FF3E799DCBC65833 /* Pods-Monalog-Test.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Monalog-Test.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Monalog-Test/Pods-Monalog-Test.debug.xcconfig"; sourceTree = "<group>"; };
 		7900683F1E014A4700DBC6F3 /* FinnControllerSpeech.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnControllerSpeech.swift; sourceTree = "<group>"; };
 		790068471E02AF1C00DBC6F3 /* pop-drip.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "pop-drip.wav"; sourceTree = "<group>"; };
@@ -66,8 +68,8 @@
 		797EEFC21DFD1FAD005D2743 /* Post+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Post+CoreDataClass.swift"; sourceTree = "<group>"; };
 		797EEFC51DFD22FE005D2743 /* FinnControllerHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnControllerHelper.swift; sourceTree = "<group>"; };
 		79E03DB41E10CA7E00E4AA61 /* FinnBot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FinnBot.swift; sourceTree = "<group>"; };
+		79E03DB61E124A5200E4AA61 /* JSONServiceObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONServiceObject.swift; sourceTree = "<group>"; };
 		C5564B832DF7B4610C7D219B /* Pods-Monalog-Test.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Monalog-Test.release.xcconfig"; path = "Pods/Target Support Files/Pods-Monalog-Test/Pods-Monalog-Test.release.xcconfig"; sourceTree = "<group>"; };
-		F8EB33D9C5E9056E3779FCEE /* libPods-Monalog-Test.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Monalog-Test.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,7 +77,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				933CCBE4BF5B7C6048CE7092 /* libPods-Monalog-Test.a in Frameworks */,
+				6C6B328EA730E21CA24938AF /* libPods-Monalog-Test.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,7 +87,7 @@
 		33350599F257C37BAC946A4E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				F8EB33D9C5E9056E3779FCEE /* libPods-Monalog-Test.a */,
+				136657778EA3268A6B8E3938 /* libPods-Monalog-Test.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -157,6 +159,7 @@
 				79E03DB41E10CA7E00E4AA61 /* FinnBot.swift */,
 				795564511E0B87D500E1B23F /* Monalog-Test-Bridging-Header.h */,
 				795564551E0C1E7500E1B23F /* Gloss */,
+				79E03DB61E124A5200E4AA61 /* JSONServiceObject.swift */,
 			);
 			path = "Monalog-Test";
 			sourceTree = "<group>";
@@ -306,6 +309,7 @@
 				7955645E1E0C1E7500E1B23F /* Decoder.swift in Sources */,
 				795564641E0C1E7500E1B23F /* Operators.swift in Sources */,
 				797EEFC01DFD1EDB005D2743 /* Message+CoreDataProperties.swift in Sources */,
+				79E03DB71E124A5200E4AA61 /* JSONServiceObject.swift in Sources */,
 				795564611E0C1E7500E1B23F /* ExtensionDictionary.swift in Sources */,
 				797EEF9D1DFA774B005D2743 /* ViewController.swift in Sources */,
 				797EEFA31DFA774B005D2743 /* Monalog_Test.xcdatamodeld in Sources */,
