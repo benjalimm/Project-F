@@ -84,25 +84,26 @@ class FeedController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.delegate = self
 
         
-        let width = UIScreen.main.bounds.width
-        let height = UIScreen.main.bounds.height
-        view.addSubview(addView)
-        view.addConstraintsWithFormat(format: "H:[v0(\(width - 40))]", views: addView)
-        view.addConstraintsWithFormat(format: "V:|[v0(\(height / 3))]|", views: addView)
-        view.addConstraint(NSLayoutConstraint(item: addView, attribute: .centerX, relatedBy: .equal, toItem: addView.superview, attribute: .centerX, multiplier: 1, constant: 0))
-        self.addView.transform = CGAffineTransform(translationX: 0, y: -height)
         
-        addView.addSubview(whatTextView)
-        addView.addSubview(whatText)
-        addView.addConstraintsWithFormat(format: "H:[v0]-5-[v1(\(width/2))]|", views: whatText, whatTextView)
-        addView.addConstraintsWithFormat(format: "V:|-20-[v0(20)]|", views: whatTextView)
-        addView.addConstraintsWithFormat(format: "V:|-20-[v0(20)]|", views: whatText)
-
-
-        
-        view.addSubview(addButton)
-        view.addConstraintsWithFormat(format: "H:[v0]-10-|", views: addButton)
-        view.addConstraintsWithFormat(format: "V:[v0]|", views: addButton)
+//        let width = UIScreen.main.bounds.width
+//        let height = UIScreen.main.bounds.height
+//        view.addSubview(addView)
+//        view.addConstraintsWithFormat(format: "H:[v0(\(width - 40))]", views: addView)
+//        view.addConstraintsWithFormat(format: "V:|[v0(\(height / 3))]|", views: addView)
+//        view.addConstraint(NSLayoutConstraint(item: addView, attribute: .centerX, relatedBy: .equal, toItem: addView.superview, attribute: .centerX, multiplier: 1, constant: 0))
+//        self.addView.transform = CGAffineTransform(translationX: 0, y: -height)
+//        
+//        addView.addSubview(whatTextView)
+//        addView.addSubview(whatText)
+//        addView.addConstraintsWithFormat(format: "H:[v0]-5-[v1(\(width/2))]|", views: whatText, whatTextView)
+//        addView.addConstraintsWithFormat(format: "V:|-20-[v0(20)]|", views: whatTextView)
+//        addView.addConstraintsWithFormat(format: "V:|-20-[v0(20)]|", views: whatText)
+//
+//
+//        
+//        view.addSubview(addButton)
+//        view.addConstraintsWithFormat(format: "H:[v0]-10-|", views: addButton)
+//        view.addConstraintsWithFormat(format: "V:[v0]|", views: addButton)
         
         
     }

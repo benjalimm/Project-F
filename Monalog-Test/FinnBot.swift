@@ -37,15 +37,14 @@ extension FinnController {
                 if response.result.action == "logExpense" {
                     if let parameters = response.result.parameters as? [String: AIResponseParameter] {
                         
-                        
-                    
-                        
                         if let items = parameters["item"] {
+                            
                             print("\(items.stringValue)")
                             self.simulate(text: items.stringValue)
                             
                             if let costs = parameters["unit-currency"] {
                                 print("\(costs.stringValue)")
+                
                                 self.simulate(text: costs.stringValue)
                             }
                             

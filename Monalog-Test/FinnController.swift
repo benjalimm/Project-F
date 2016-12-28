@@ -217,6 +217,11 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     private let audioEngine = AVAudioEngine()
     
+    private let captureSession = AVCaptureSession()
+    
+    
+    
+    
     public func askPermission() {
         
     }
@@ -234,7 +239,6 @@ class FinnController: UICollectionViewController, UICollectionViewDelegateFlowLa
         try audioSession.setCategory(AVAudioSessionCategoryRecord)
         try audioSession.setMode(AVAudioSessionModeMeasurement)
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
-        
         
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
